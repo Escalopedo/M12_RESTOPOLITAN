@@ -6,11 +6,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id', // El campo role_id para asignar un rol al usuario
     ];
 
     /**
@@ -34,15 +35,36 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    /**
+     * Get the role associated with the user.
+     */
+    public function role()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Role::class); // Relación de muchos a uno con el modelo Role
+    }
+
+    /**
+     * Get the reviews given by the user.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class); // Relación de uno a muchos con el modelo Review
+    }
+
+    /**
+     * Get the restaurants created by the user (for gerente role).
+     */
+    public function restaurants()
+    {
+        return $this->hasMany(Restaurant::class, 'gerente_id'); // Relación con los restaurantes creados por este usuario (si es gerente)
     }
 }
