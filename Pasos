@@ -19,4 +19,11 @@ php artisan make:model CuisineType
 php artisan make:model RestaurantCuisineType
 php artisan make:model Role
 
+# -------------------------------- 
 
+# CONTROLADORES (recibe las solicitudes que el usuario hace desde el navegador)
+
+php artisan make:controller UserController
+php artisan make:controller RestaurantController
+php artisan make:controller ReviewController
+php artisan make:controller CuisineTypeController
