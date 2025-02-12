@@ -15,16 +15,20 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">Restopolitan</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('restaurants.index') }}">Restaurantes</a></li>
-                </ul>
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Logo + Buscador -->
+            <div class="d-flex align-items-center">
+                <a class="navbar-brand me-3" href="{{ route('home') }}">Restopolitan</a>
+                <form class="d-flex search-form">
+                    <input class="form-control me-2" type="search" placeholder="Buscar restaurantes..." aria-label="Buscar">
+                    <button class="btn btn-outline-light" type="submit">Buscar</button>
+                </form>
+            </div>
+
+            <!-- Botones de Login y Registro -->
+            <div class="d-flex">
+                <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
+                <a href="{{ route('register') }}" class="btn btn-danger">Registrarse</a>
             </div>
         </div>
     </nav>
@@ -42,7 +46,6 @@
     <section class="container mt-5">
         <h2 class="text-center">Restaurantes Destacados</h2>
         <div class="row">
-            <!-- Ejemplo de tarjeta de restaurante -->
             <div class="col-md-4">
                 <div class="card">
                     <img src="{{ asset('images/restaurant1.jpg') }}" class="card-img-top" alt="Restaurante 1">

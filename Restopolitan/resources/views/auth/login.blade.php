@@ -1,28 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
-    <h1>Login</h1>
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" name="email" required>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
-        </div>
-        <div>
-            <button type="submit">Login</button>
-        </div>
+    <div class="container">
+        <h2>Iniciar Sesión</h2>
         @if ($errors->any())
-            <div>
-                <strong>{{ $errors->first() }}</strong>
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
-    </form>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <label>Email:</label>
+            <input type="email" name="email" required>
+            <label>Contraseña:</label>
+            <input type="password" name="password" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <a href="{{ route('register') }}">Registrarse</a>
+    </div>
 </body>
 </html>

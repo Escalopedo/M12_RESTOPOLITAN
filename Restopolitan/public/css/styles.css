@@ -1,4 +1,62 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
 
+/* Barra de navegación */
+.navbar {
+    background-color: #222;
+    padding: 10px 0;
+}
+
+/* Logo */
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Buscador dentro del navbar */
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form input {
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+.search-form button {
+    margin-left: 5px;
+}
+
+/* Botones de Login y Registro */
+.btn-outline-light {
+    border: 1px solid white;
+    color: white;
+}
+
+.btn-outline-light:hover {
+    background-color: white;
+    color: black;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Hero Section */
 .hero-section {
     background: url('/images/hero-image.jpg') no-repeat center center;
     background-size: cover;
@@ -25,19 +83,7 @@
     font-size: 1.2rem;
 }
 
-.navbar {
-    background-color: #222;
-}
-
-.navbar-brand {
-    font-size: 1.8rem;
-    font-weight: bold;
-}
-
-.navbar-nav .nav-link {
-    font-size: 1.1rem;
-}
-
+/* Sección de restaurantes */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -51,11 +97,13 @@ h2 {
     margin-bottom: 20px;
 }
 
+/* Botones */
 .btn-lg {
     padding: 15px 30px;
     font-size: 1.2rem;
 }
 
+/* Responsividad */
 @media (max-width: 768px) {
     .hero-section h1 {
         font-size: 3rem;
