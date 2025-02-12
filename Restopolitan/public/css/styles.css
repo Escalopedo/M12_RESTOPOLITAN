@@ -1,0 +1,77 @@
+/* styles.css */
+
+/* Hero Section (Fondo con imagen y texto centrado) */
+.hero-section {
+    background: url('/images/hero-image.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.hero-section .btn-primary {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+}
+
+/* Barra de navegación */
+.navbar {
+    background-color: #222;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Botones */
+.btn-lg {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 3rem;
+    }
+    
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    .btn-lg {
+        font-size: 1rem;
+    }
+}
