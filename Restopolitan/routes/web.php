@@ -1,18 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RestaurantController;
 
-Route::get('/', function () {
-    return view('index');
-});
+// Ruta para la página de inicio
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-//Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::middleware(['auth'])->group(function() {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Rutas para restaurantes
+Route::resource('restaurants', RestaurantController::class);
