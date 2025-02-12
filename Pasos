@@ -23,7 +23,10 @@ php artisan make:model Role
 
 # CONTROLADORES (recibe las solicitudes que el usuario hace desde el navegador)
 
+# El home controller lo usaremos como "index"
+php artisan make:controller HomeController
 php artisan make:controller UserController
+php artisan make:controller AuthController
 php artisan make:controller RestaurantController
 php artisan make:controller ReviewController
 php artisan make:controller CuisineTypeController
