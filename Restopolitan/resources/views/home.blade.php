@@ -23,9 +23,8 @@
                 <button type="submit" class="btn"><i class="fas fa-search"></i></button>
             </form>
             <ul class="nav-links">
-                <li><a href="#">REGISTRA TU CÓDIGO</a></li>
-                <li><a href="#">CONÉCTATE</a></li>
-                <li><a href="#" class="subscribe-btn">¡SÚSCRIBETE!</a></li>
+                <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
+                <li><a href="{{ route('register') }}" class="subscribe-btn">¡REGISTRATE!</a></li>
             </ul>
         </div>
     </nav>
