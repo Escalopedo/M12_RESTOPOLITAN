@@ -30,3 +30,27 @@ php artisan make:controller AuthController
 php artisan make:controller RestaurantController
 php artisan make:controller ReviewController
 php artisan make:controller CuisineTypeController
+
+# -------------------------------- 
+
+# SEEDERS 
+
+# CREACIÓN DE SEEDERS
+
+php artisan make:seeder RolesTableSeeder
+php artisan make:seeder UsersTableSeeder
+php artisan make:seeder CuisineTypesTableSeeder
+php artisan make:seeder RestaurantsTableSeeder
+php artisan make:seeder RestaurantCuisineTypesTableSeeder
+php artisan make:seeder ReviewsTableSeeder
+php artisan make:seeder SessionsTableSeeder
+
+# EJECUCIÓN DE SEEDERS
+
+php artisan db:seed --class=RolesTableSeeder
+php artisan db:seed --class=UsersTableSeeder
+php artisan db:seed --class=CuisineTypesTableSeeder
+php artisan db:seed --class=RestaurantsTableSeeder
+php artisan db:seed --class=RestaurantCuisineTypesTableSeeder
+php artisan db:seed --class=ReviewsTableSeeder
+php artisan db:seed --class=SessionsTableSeeder
