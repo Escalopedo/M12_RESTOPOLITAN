@@ -227,7 +227,13 @@ button[type="submit"]:hover {
 }
 
 a {
-    margin-top: 20px;
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
     color: #1a1a3b;
     text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
