@@ -10,7 +10,9 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
-        <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" width="150">
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" width="150">
+            </a>
         </div>
     </nav>
 
