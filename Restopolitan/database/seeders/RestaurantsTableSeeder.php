@@ -9,7 +9,6 @@ class RestaurantsTableSeeder extends Seeder
 {
     public function run()
     {
-        // Inserta los restaurantes con referencias directas a los IDs de las ubicaciones
         DB::table('restaurants')->insert([
             [
                 'name' => 'Restaurante Italiano',
