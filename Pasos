@@ -47,6 +47,8 @@ php artisan make:seeder SessionsTableSeeder
 
 # EJECUCIÓN DE SEEDERS
 
+# EJECUCCIÓN UNO A UNO
+
 php artisan db:seed --class=RolesTableSeeder
 php artisan db:seed --class=UsersTableSeeder
 php artisan db:seed --class=CuisineTypesTableSeeder
@@ -54,3 +56,18 @@ php artisan db:seed --class=RestaurantsTableSeeder
 php artisan db:seed --class=RestaurantCuisineTypesTableSeeder
 php artisan db:seed --class=ReviewsTableSeeder
 php artisan db:seed --class=SessionsTableSeeder
+
+#EJECUCCIÓN TODOS A LA VEZ
+
+php artisan db:seed
+
+# -------------------------------- 
+
+# FACTORIES
+
+# CREACIÓN FACTORIES
+
+php artisan make:factory RestaurantFactory 
+php artisan make:factory CuisineTypeFactory 
+php artisan make:factory ReviewFactory
+php artisan make:factory RestaurantCuisineTypeFactory
