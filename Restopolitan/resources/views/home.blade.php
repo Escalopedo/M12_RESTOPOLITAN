@@ -60,31 +60,16 @@
     <section class="details-section">
         <div class="container">
             <h2>CUENTA</h2>
-            <!-- Slider Bootstrap -->
-            <div id="carouselCuenta" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{{ asset('images/slide1.jpg') }}" class="d-block w-100" alt="Imagen 1">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('images/slide2.jpg') }}" class="d-block w-100" alt="Imagen 2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('images/slide3.jpg') }}" class="d-block w-100" alt="Imagen 3">
-                    </div>
-                </div>
-                <!-- Controles del carrusel -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselCuenta" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Anterior</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselCuenta" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Siguiente</span>
-                </button>
-            </div>
+            <ul>
+                <li>Inventidad de carácter público: 2.000 horas de trabajo (mínimo 3 años)</li>
+                <li>Desarrollo de carácter público: 0.000 horas de trabajo (mínimo 5 años)</li>
+                <li>Desarrollo de carácter público: 0.000 horas de trabajo (mínimo 10 años)</li>
+                <li>Desarrollo de carácter público: 0.000 horas de trabajo (mínimo 20 años)</li>
+                <li>Desarrollo de carácter público: 0.000 horas de trabajo (mínimo 30 años)</li>
+            </ul>
         </div>
-</section>    <!-- Sección de LECTORES -->
+    </section>
+    <!-- Sección de LECTORES -->
     <section class="readers-section">
         <div class="container">
             <h2>LECTORES</h2>
