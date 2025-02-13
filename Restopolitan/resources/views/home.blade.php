@@ -19,7 +19,7 @@
     <nav class="navbar">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                RESTOPOLITAN
+            <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" width="150">
             </a>
             <form class="search-form">
                 <input type="text" class="form-control" placeholder="Búsqueda por nombre, dirección, ciudad...">
