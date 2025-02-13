@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('photo')->nullable();
             $table->foreignId('gerente_id')->nullable()->constrained('users')->onDelete('set null');
             $table->decimal('rating', 3, 2)->nullable(); // Promedio de valoraciones
+            $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
