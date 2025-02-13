@@ -3,9 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 
-class UserFactory extends Factory
+class CuisineTypeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,10 +14,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'password' => Hash::make('password'), // Contraseña por defecto: "password"
-            'email_verified_at' => now(),
+            'name' => $this->faker->unique()->word, // Nombre único de tipo de cocina
             'created_at' => now(),
             'updated_at' => now(),
         ];

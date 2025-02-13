@@ -1,28 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Restopolitan</title>
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
-    <h1>Login</h1>
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" name="email" required>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" width="150">
+            </a>
         </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
+    </nav>
+
+    <!-- Contenedor del formulario -->
+    <div class="container">
+        <h2>CONEXIÓN</h2>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <label>E-mail:</label>
+            <input type="email" name="email" placeholder="Ingresa tu correo electrónico" required>
+            <label>Contraseña:</label>
+            <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
+            <a href="#" class="forgot-password">¿Has olvidado tu contraseña?</a>
+            <button type="submit">IDENTIFICATE</button>
+        </form>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span>o</span>
         </div>
-        <div>
-            <button type="submit">Login</button>
-        </div>
-        @if ($errors->any())
-            <div>
-                <strong>{{ $errors->first() }}</strong>
-            </div>
-        @endif
-    </form>
+
+        <!-- Botón de Facebook -->
+        <button class="fb-login">
+            <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook Icon" width="20">
+            INICIA SESIÓN CON FACEBOOK
+        </button>
+
+        <!-- Enlace de registro -->
+        <a href="{{ route('register') }}" class="register-link">Aún no tengo cuenta</a>
+    </div>
 </body>
 </html>

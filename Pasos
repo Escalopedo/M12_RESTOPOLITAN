@@ -7,6 +7,7 @@ php artisan make:migration create_cuisine_types_table
 php artisan make:migration create_restaurants_table
 php artisan make:migration create_restaurant_cuisine_types_table
 php artisan make:migration create_reviews_table
+php artisan make:migration create_locations_table
 
 # -------------------------------- 
 
@@ -23,7 +24,52 @@ php artisan make:model Role
 
 # CONTROLADORES (recibe las solicitudes que el usuario hace desde el navegador)
 
+# El home controller lo usaremos como "index"
+php artisan make:controller HomeController
 php artisan make:controller UserController
+php artisan make:controller AuthController
 php artisan make:controller RestaurantController
 php artisan make:controller ReviewController
 php artisan make:controller CuisineTypeController
+
+# -------------------------------- 
+
+# SEEDERS 
+
+# CREACIÓN DE SEEDERS
+
+php artisan make:seeder RolesTableSeeder
+php artisan make:seeder UsersTableSeeder
+php artisan make:seeder CuisineTypesTableSeeder
+php artisan make:seeder RestaurantsTableSeeder
+php artisan make:seeder RestaurantCuisineTypesTableSeeder
+php artisan make:seeder ReviewsTableSeeder
+php artisan make:seeder SessionsTableSeeder
+php artisan make:seeder LocationSeeder
+
+# EJECUCIÓN DE SEEDERS
+
+# EJECUCCIÓN UNO A UNO
+
+php artisan db:seed --class=RolesTableSeeder
+php artisan db:seed --class=UsersTableSeeder
+php artisan db:seed --class=CuisineTypesTableSeeder
+php artisan db:seed --class=RestaurantsTableSeeder
+php artisan db:seed --class=RestaurantCuisineTypesTableSeeder
+php artisan db:seed --class=ReviewsTableSeeder
+php artisan db:seed --class=SessionsTableSeeder
+
+#EJECUCCIÓN TODOS A LA VEZ
+
+php artisan db:seed
+
+# -------------------------------- 
+
+# FACTORIES
+
+# CREACIÓN FACTORIES
+
+php artisan make:factory RestaurantFactory 
+php artisan make:factory CuisineTypeFactory 
+php artisan make:factory ReviewFactory
+php artisan make:factory RestaurantCuisineTypeFactory

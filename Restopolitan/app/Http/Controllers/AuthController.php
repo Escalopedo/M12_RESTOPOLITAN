@@ -4,48 +4,55 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function showLoginForm() {
+    public function showLogin()
+    {
         return view('auth.login');
     }
 
     public function login(Request $request)
     {
-        // 1. Validar los datos del formulario: 
-        // el email debe ser válido y la contraseña no puede estar vacía
-        $request->validate([
-            'email' => 'required|email', 
-         // Verifica que el campo email no esté vacío y sea un email válido
-            'password' => 'required',
-            // Verifica que el campo contraseña no esté vacío
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
-        // Intentar autenticar al usuario con las credenciales proporcionadas
-        if (Auth::attempt($request->only('email', 'password'))) {
-           // Si las credenciales son válidas, regenera la sesión para protegerla contra ataques
-            $request->session()->regenerate();
-
-            // Redirige al usuario a la página que intentaba acceder o al dashboard por defecto
-            return redirect()->intended('/dashboard');
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('home');
         }
 
-        // Si la autenticación falla, redirige de vuelta con un mensaje de error
-        return back()->withErrors([
-            'email' => 'Las credenciales no coinciden con nuestros registros.', 
-         // Mensaje de error genérico
-        ]);
+        return back()->withErrors(['email' => 'Las credenciales no son correctas']);
     }
 
-    public function logout(Request $request) {
-        //Cerrar la sesión
+    public function showRegister()
+    {
+        return view('auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed'
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('login')->with('success', 'Registro exitoso. Inicia sesión.');
+    }
+
+    public function logout(Request $request)
+    {
         Auth::logout();
-        //Invalidar la sesión para evitar que se reutilice
-        $request->session()->invalidate();
-        //Generar un nuevo token de sesión para prevenir ataques CSRF
-        $request->session()->regenerateToken();
-        //Redirigir al usuario a la página de inicio de sesión
-        return redirect('/login');
+        return redirect()->route('home');
     }
 }
