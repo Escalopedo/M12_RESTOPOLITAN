@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restopolitan - Suscripción Gastronómica</title>
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <!-- CSS Personalizado -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    
     <!-- Fuentes de Google -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -15,7 +18,7 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 RESTOPOLITAN
             </a>
             <form class="search-form">
@@ -24,56 +27,55 @@
             </form>
             <ul class="nav-links">
                 <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
-                <li><a href="{{ route('register') }}" class="subscribe-btn">¡REGISTRATE!</a></li>
+                <li><a href="{{ route('register') }}" class="subscribe-btn">¡REGÍSTRATE!</a></li>
             </ul>
         </div>
     </nav>
+    
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container text-center">
             <h1>LA SUSCRIPCIÓN PARA LOS AMANTES DE LA GASTRONOMÍA</h1>
             <p>1 persona invitada en cada reserva</p>
-            <p class="price">119 € / LARO</p>
+            <p class="price">119 € / AÑO</p>
         </div>
     </section>
-    <!-- Sección de Beneficios -->
-    <section class="benefits-section">
-        <div class="container">
-            <h2>1 PERSONA INVITADA EN CADA RESERVA</h2>
-            <div class="row">
+
+    <!-- Sección de Destacados -->
+    <section class="container mt-5">
+        <h2 class="text-center">Restaurantes Destacados</h2>
+        <div class="row">
+            @foreach($restaurants as $restaurant)
                 <div class="col-md-4">
-                    <h3>INVITADO</h3>
-                    <p>Un entorno y el sitio de un plato y un plato desarrollado de la cuenta desde tu primera reserva.</p>
+                    <div class="card">
+                        <img src="{{ asset('images/' . $restaurant->photo) }}" class="card-img-top" alt="{{ $restaurant->name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $restaurant->name }}</h5>
+                            <p class="card-text">{{ $restaurant->description }}</p>
+                            <a href="#" class="btn btn-outline-primary">Ver más</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <h3>RESERVA EN DELEC</h3>
-                    <p>Espléndidos dónde ha aplicado la dotación a web.</p>
-                </div>
-                <div class="col-md-4">
-                    <h3>SEPARAN EN UN CASA</h3>
-                    <p>Reserva treinta veces como quieres, si ves, tú vaces, tos veces. ¡Es limitador!</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
-    <!-- Sección de Detalles -->
+
+    <!-- Sección Slider con imágenes de la base de datos -->
     <section class="details-section">
         <div class="container">
-            <h2>CUENTA</h2>
-            <!-- Slider Bootstrap -->
+            <h2>Descubre Nuestros Restaurantes</h2>
             <div id="carouselCuenta" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{{ asset('images/slide1.jpg') }}" class="d-block w-100" alt="Imagen 1">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('images/slide2.jpg') }}" class="d-block w-100" alt="Imagen 2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('images/slide3.jpg') }}" class="d-block w-100" alt="Imagen 3">
-                    </div>
+                    @foreach($restaurants as $index => $restaurant)
+                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                            <img src="{{ asset('images/' . $restaurant->photo) }}" class="d-block w-100" alt="{{ $restaurant->name }}">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{ $restaurant->name }}</h5>
+                                <p>{{ $restaurant->description }}</p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <!-- Controles del carrusel -->
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselCuenta" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Anterior</span>
@@ -84,25 +86,8 @@
                 </button>
             </div>
         </div>
-</section>    <!-- Sección de LECTORES -->
-    <section class="readers-section">
-        <div class="container">
-            <h2>LECTORES</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <h3>BAS-TRAPS ZZATSÁN</h3>
-                    <p>Valores de 90 €</p>
-                </div>
-                <div class="col-md-4">
-                    <h3>LA TERRENA DEL EO</h3>
-                    <p>Cuenta del año</p>
-                </div>
-                <div class="col-md-4">
-                    <h3>La presencia incluida a todos a través de la Casa</h3>
-                </div>
-            </div>
-        </div>
     </section>
+
     <!-- Footer -->
     <footer class="footer bg-dark text-white">
         <div class="container">
@@ -126,10 +111,11 @@
                 </div>
             </div>
             <div class="text-center mt-4">
-                <p>&copy; 2023 Restopolitan. Todos los derechos reservados.</p>
+                <p>&copy; {{ date('Y') }} Restopolitan. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
