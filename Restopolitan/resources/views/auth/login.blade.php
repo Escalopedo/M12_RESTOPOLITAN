@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Restopolitan</title>
+    <script src="{{ asset('js/login.js') }}" defer></script> <!-- Archivo JavaScript externo -->
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
@@ -19,12 +20,14 @@
     <!-- Contenedor del formulario -->
     <div class="container">
         <h2>CONEXIÓN</h2>
-        <form method="POST" action="{{ route('login') }}">
+        <form id="loginForm" method="POST" action="{{ route('login') }}">
             @csrf
             <label>E-mail:</label>
-            <input type="email" name="email" placeholder="Ingresa tu correo electrónico" required>
+            <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico">
+            <span class="error-message" id="emailError" style="color: red; font-size: 14px;"></span>
             <label>Contraseña:</label>
-            <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
+            <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña">
+            <span class="error-message" id="passwordError" style="color: red; font-size: 14px;"></span><br>
             <a href="#" class="forgot-password">¿Has olvidado tu contraseña?</a>
             <button type="submit">IDENTIFICATE</button>
         </form>
