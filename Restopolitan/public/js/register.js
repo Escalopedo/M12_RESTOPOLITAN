@@ -12,14 +12,12 @@ showFormButton.addEventListener('click', () => {
 
 // Función para mostrar u ocultar errores
 function mostrarError(input, mensajeError, mensaje) {
-    input.style.border = '2px solid red';
     mensajeError.style.color = 'red';
     mensajeError.textContent = mensaje;
     mensajeError.classList.add("active"); // Mostrar mensaje
 }
 
 function ocultarError(input, mensajeError) {
-    input.style.border = '';
     mensajeError.textContent = '';
     mensajeError.classList.remove("active"); // Ocultar mensaje
 }
