@@ -21,10 +21,10 @@
             <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" width="150">
             </a>
-            <form class="search-form">
-                <input type="text" class="form-control" placeholder="Búsqueda por nombre, dirección, ciudad...">
+            <form class="search-form" id="search-form">
+                <input type="text" class="form-control" id="search-input" placeholder="Búsqueda por nombre, dirección, ciudad...">
                 <button type="submit" class="btn"><i class="fas fa-search"></i></button>
-            </form>
+            </form>            
             <ul class="nav-links">
                 @guest
                     <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
@@ -57,9 +57,9 @@
     <!-- Sección de Destacados -->
     <section class="container mt-5">
         <h2 class="text-center">Restaurantes Destacados</h2>
-        <div class="row">
+        <div class="row" id="restaurants-container">
             @foreach($restaurants as $restaurant)
-                <div class="col-md-4">
+                <div class="col-md-4 restaurant-item">
                     <div class="card">
                         <img src="{{ asset('images/' . $restaurant->photo) }}" class="card-img-top" alt="{{ $restaurant->name }}">
                         <div class="card-body">
@@ -71,7 +71,7 @@
                 </div>
             @endforeach
         </div>
-    </section>
+    </section>    
 
     <!-- Sección Slider con imágenes de la base de datos -->
     <section class="details-section">
@@ -132,5 +132,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/logout.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
 </body>
 </html>
