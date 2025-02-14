@@ -26,9 +26,22 @@
                 <button type="submit" class="btn"><i class="fas fa-search"></i></button>
             </form>
             <ul class="nav-links">
-                <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
-                <li><a href="{{ route('register') }}" class="subscribe-btn">¡REGÍSTRATE!</a></li>
-            </ul>
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
+                    <li><a href="{{ route('register') }}" class="subscribe-btn">¡REGÍSTRATE!</a></li>
+                @endguest
+            
+                @auth
+                    <li>
+                        <a href="{{ route('logout') }}" id="logout-button" class="btn btn-danger">
+                            Cerrar sesión
+                        </a>
+                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                @endauth
+            </ul>            
         </div>
     </nav>
     
@@ -118,5 +131,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/logout.js') }}"></script>
 </body>
 </html>
