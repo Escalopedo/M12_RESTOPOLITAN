@@ -13,12 +13,13 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesTableSeeder::class,
+            LocationSeeder::class,
             UsersTableSeeder::class,
             CuisineTypesTableSeeder::class,
             RestaurantsTableSeeder::class, 
-            RestaurantCuisineTypesTableSeeder::class,
-            ReviewsTableSeeder::class,
             SessionsTableSeeder::class,
+            ReviewsTableSeeder::class,
+            RestaurantCuisineTypesTableSeeder::class,
         ]);
     }
 }
