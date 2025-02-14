@@ -30,5 +30,11 @@ Route::get('/search', function (Request $request) {
     ->select('restaurants.*') //Muestra los datos de la tabla restaurants
     ->get();
 
+    /*$restaurants = Restaurant::join('cuisine_types', 'restaurants.cuisine_type_id', '=', 'cuisine_types.id')
+    ->where('restaurants.name', 'like', "%$query%")
+    ->orWhere('cuisine_types.name', 'like', "%$query%")
+    ->select('restaurants.*') //Muestra los datos de la tabla restaurants
+    ->get();*/
+
     return view('partials.restaurants', compact('restaurants'));
 });
