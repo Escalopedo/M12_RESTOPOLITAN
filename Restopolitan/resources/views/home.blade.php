@@ -109,6 +109,27 @@
         </div>
     </section>
 
+    <!-- Sección de Estadísticas con color gris y ancho completo -->
+    <section class="stats-section bg-gray py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">¿QUIERES SABER MÁS SOBRE RESTOPOLITAN?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="display-4">543.987</h3>
+                    <p class="lead">SOCIOS</p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="display-4">3.576</h3>
+                    <p class="lead">RESTAURANTES</p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="display-4">5</h3>
+                    <p class="lead">PAÍSES</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer bg-dark text-white">
         <div class="container">
