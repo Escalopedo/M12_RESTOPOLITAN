@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('restaurant_id')->constrained('restaurants')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->tinyInteger('rating')->unsigned()->check('rating >= 1 AND rating <= 5')->change();
+            $table->integer('rating');
             $table->text('comment')->nullable();
             $table->timestamps();
             $table->softDeletes(); // Soft deletes
