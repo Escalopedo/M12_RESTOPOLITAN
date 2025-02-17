@@ -25,9 +25,19 @@
             <label>E-mail:</label>
             <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico">
             <span class="error-message" id="emailError" style="color: red; font-size: 14px;"></span>
+
             <label>Contraseña:</label>
             <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña">
             <span class="error-message" id="passwordError" style="color: red; font-size: 14px;"></span><br>
+            
+            <!-- Aquí mostramos el error global si las credenciales son incorrectas -->
+            @if ($errors->has('credentials'))
+                <span class="invalid-feedback" role="alert" style="color: red">
+                    {{ $errors->first('credentials') }}
+                </span><br>
+            @endif
+            
+            <br>
             <a href="#" class="forgot-password">¿Has olvidado tu contraseña?</a>
             <button type="submit">IDENTIFICATE</button>
         </form>

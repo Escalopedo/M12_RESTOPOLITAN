@@ -8,6 +8,9 @@ php artisan make:migration create_restaurants_table
 php artisan make:migration create_restaurant_cuisine_types_table
 php artisan make:migration create_reviews_table
 php artisan make:migration create_locations_table
+php artisan make:migration create_menus_table
+php artisan make:migration create_dishes_table
+
 
 # RESETEAR MIGRACIONES
 
@@ -27,6 +30,9 @@ php artisan make:model Review
 php artisan make:model CuisineType
 php artisan make:model RestaurantCuisineType
 php artisan make:model Role
+php artisan make:model Menu
+php artisan make:model Dish
+
 
 # -------------------------------- 
 
