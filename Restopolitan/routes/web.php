@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RestaurantController;
-use App\Http\Controllers\AuthController; // Agregar el AuthController
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
 
@@ -19,6 +19,9 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Ruta de detalle del restaurante
+Route::get('/restaurant/{id}', [RestaurantController::class, 'show'])->name('restaurant.show');
 
 Route::get('/search', function (Request $request) {
     $query = $request->input('query');

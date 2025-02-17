@@ -65,7 +65,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $restaurant->name }}</h5>
                             <p class="card-text">{{ $restaurant->description }}</p>
-                            <a href="#" class="btn btn-outline-primary">Ver más</a>
+                            <a href="{{ Auth::check() ? route('restaurant.show', $restaurant->id) : route('login') }}" class="btn btn-outline-primary">Ver más</a>
                         </div>
                     </div>
                 </div>
