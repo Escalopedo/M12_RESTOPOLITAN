@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
 use App\Models\Restaurant;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;  // Asegúrate de tener esta línea para trabajar con Auth
 
 // Ruta para la página de inicio
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -23,6 +24,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Ruta de detalle del restaurante
 Route::get('/restaurant/{id}', [RestaurantController::class, 'show'])->name('restaurant.show');
 
+// Ruta para la búsqueda de restaurantes
 Route::get('/search', function (Request $request) {
     $query = $request->input('query');
 
@@ -30,14 +32,20 @@ Route::get('/search', function (Request $request) {
     ->where('restaurants.name', 'like', "%$query%")
     ->orWhere('locations.street_address', 'like', "%$query%")
     ->orWhere('locations.city', 'like', "%$query%")
-    ->select('restaurants.*') //Muestra los datos de la tabla restaurants
+    ->select('restaurants.*') // Muestra los datos de la tabla restaurants
     ->get();
-
-    /*$restaurants = Restaurant::join('cuisine_types', 'restaurants.cuisine_type_id', '=', 'cuisine_types.id')
-    ->where('restaurants.name', 'like', "%$query%")
-    ->orWhere('cuisine_types.name', 'like', "%$query%")
-    ->select('restaurants.*') //Muestra los datos de la tabla restaurants
-    ->get();*/
 
     return view('partials.restaurants', compact('restaurants'));
 });
+
+// Ruta protegida para administradores
+Route::get('/admin', function () {
+    // Verifica si el usuario está autenticado y tiene el rol 'Admin'
+    if (Auth::check() && Auth::user()->role && Auth::user()->role->name === 'Admin') {
+        return view('admin'); // Redirige a la vista admin.blade.php
+    }
+
+    // Si no es admin, redirige con mensaje de error
+    return redirect('/')->with('error', 'No tienes permisos para acceder a esta página');
+})->name('admin.index')->middleware('auth');
+
