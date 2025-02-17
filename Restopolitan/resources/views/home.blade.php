@@ -46,10 +46,10 @@
     </nav>
     
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section" style="background-image: url('{{ asset('images/fondo.jpg') }}');">
         <div class="container text-center">
             <h1>LA SUSCRIPCIÓN PARA LOS AMANTES DE LA GASTRONOMÍA</h1>
-            <p>1 persona invitada en cada reserva</p>
+            <h2>1 persona invitada en cada reserva</h2>
             <p class="price">119 € / AÑO</p>
         </div>
     </section>

@@ -105,10 +105,11 @@ a:hover {
 
 /* Hero Section */
 .hero-section {
-    background-color: #ff6347;
+    background-size: cover;
     color: #fff;
     padding: 100px 0;
     text-align: center;
+    height: 100vh;
 }
 
 .hero-section h1 {
