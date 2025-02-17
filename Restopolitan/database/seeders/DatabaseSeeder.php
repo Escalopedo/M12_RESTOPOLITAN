@@ -16,10 +16,13 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             UsersTableSeeder::class,
             CuisineTypesTableSeeder::class,
-            RestaurantsTableSeeder::class, 
+            RestaurantsTableSeeder::class,
             SessionsTableSeeder::class,
             ReviewsTableSeeder::class,
             RestaurantCuisineTypesTableSeeder::class,
+            MenusTableSeeder::class,              
+            DishesTableSeeder::class,             
+            DishCuisineTypesTableSeeder::class, 
         ]);
     }
 }

@@ -32,11 +32,19 @@
                 @endguest
             
                 @auth
+
+                <!-- Si el usuario tiene el rol de Admin, mostramos el botón -->
+                @if(Auth::user()->role && Auth::user()->role->name === 'Admin')
+                        <li>
+                            <a href="{{ url('/admin') }}" class="btn btn-outline-light">Admin</a>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{ route('logout') }}" id="logout-button" class="btn btn-danger">
                             Cerrar sesión
                         </a>
                     </li>
+
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
