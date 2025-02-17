@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Admin User',
                 'email' => 'admin@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 1, // Admin
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Regular User',
                 'email' => 'user@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 3, // Usuario normal
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Trattoria Roma',
                 'email' => 'gerente1@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -46,7 +46,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente El Mariachi',
                 'email' => 'gerente2@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -55,7 +55,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Sakura Sushi',
                 'email' => 'gerente3@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -64,7 +64,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Gran Muralla',
                 'email' => 'gerente4@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -73,7 +73,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Mediterráneo Grill',
                 'email' => 'gerente5@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -82,7 +82,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Curry House',
                 'email' => 'gerente6@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -91,7 +91,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Le Petit Bistro',
                 'email' => 'gerente7@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -100,7 +100,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Texas BBQ',
                 'email' => 'gerente8@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -109,7 +109,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Green Veggie',
                 'email' => 'gerente9@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -118,7 +118,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Vegan Bliss',
                 'email' => 'gerente10@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -127,7 +127,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Bangkok Street',
                 'email' => 'gerente11@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -136,7 +136,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Seoul Kitchen',
                 'email' => 'gerente12@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -145,7 +145,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Alhambra Delights',
                 'email' => 'gerente13@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -154,7 +154,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente La Taberna Española',
                 'email' => 'gerente14@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -163,7 +163,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Gerente Santorini Taverna',
                 'email' => 'gerente15@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('qweQWE123'),
                 'role_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
