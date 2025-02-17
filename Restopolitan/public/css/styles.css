@@ -105,11 +105,30 @@ a:hover {
 
 /* Hero Section */
 .hero-section {
+    position: relative;
     background-size: cover;
     color: #fff;
     padding: 100px 0;
     text-align: center;
     height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(73, 73, 122, 0.5);
+    pointer-events: none;
+}
+
+.hero-section .container {
+    position: relative; /* Esto asegura que el texto se quede por encima de la capa azul */
+    z-index: 2; /* Coloca el texto por encima del pseudo-elemento */
 }
 
 .hero-section h1 {
