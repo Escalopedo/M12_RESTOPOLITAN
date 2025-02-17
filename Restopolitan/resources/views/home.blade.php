@@ -75,6 +75,7 @@
                             <p class="card-text">{{ $restaurant->description }}</p>
                             <a href="{{ Auth::check() ? route('restaurant.show', $restaurant->id) : route('login') }}" class="btn btn-outline-primary">Ver más</a>
                         </div>
+                            <a href="{{ route('restaurants.details', $restaurant->id) }}" class="btn btn-outline-primary">Ver más</a>                        </div>
                     </div>
                 </div>
             @endforeach

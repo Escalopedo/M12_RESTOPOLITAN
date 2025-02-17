@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
@@ -11,6 +10,12 @@ class RestaurantController extends Controller
     {
         $restaurants = Restaurant::all();
         return view('admin', compact('restaurants'));
+    }
+
+    public function show($id)
+    {
+        $restaurant = Restaurant::with('location')->findOrFail($id); // Obtiene el restaurante con el ID especificado
+        return view('restaurants.details', compact('restaurant')); // Pasas el restaurante a la vista
     }
 
     // Mostrar el formulario de edición de un restaurante

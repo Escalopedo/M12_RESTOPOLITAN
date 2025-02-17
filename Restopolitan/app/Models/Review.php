@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'restaurant_id',
+        'user_id',
+        'rating',
+        'comment'
+    ];
 
     protected $table = 'reviews';  // Tabla personalizada para las reseñas
 

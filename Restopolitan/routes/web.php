@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AuthController;
 use App\Models\Restaurant;
@@ -11,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 // Ruta para la página de inicio
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Ruta para la página detalles
+Route::get('/restaurants/{id}', [RestaurantController::class, 'show'])->name('restaurants.details');
+Route::post('/restaurants/{id}/review', [ReviewController::class, 'store'])->name('reviews.store');
 // Rutas para restaurantes
 Route::resource('restaurants', RestaurantController::class);
 
