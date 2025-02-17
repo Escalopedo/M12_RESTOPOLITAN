@@ -232,3 +232,33 @@ footer p {
     margin: 0;
     font-size: 1rem;
 }
+
+
+
+/* Estilos para la sección de estadísticas */
+.stats-section {
+    padding: 60px 0;
+}
+
+.stats-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.stats-section .display-4 {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.stats-section .lead {
+    font-size: 1.25rem;
+    color: #666;
+}
+
+/* Estilos para el fondo gris y ancho completo */
+.bg-gray {
+    background-color: #f0f0f0; /* Color gris claro */
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    margin: 0; /* Elimina el margen predeterminado */
+    padding: 60px 0; /* Ajusta el padding para mantener el espaciado interno */
+}
