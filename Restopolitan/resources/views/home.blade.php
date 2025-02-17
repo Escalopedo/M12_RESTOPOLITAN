@@ -22,7 +22,7 @@
             <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" width="150">
             </a>
             <form class="search-form" id="search-form">
-                <input type="text" class="form-control" id="search-input" placeholder="Búsqueda por nombre, dirección, ciudad...">
+                <input type="text" class="form-control" id="-searchinput" placeholder="Búsqueda por nombre, precio, valoración, tipo de cocina...">
                 <button type="submit" class="btn"><i class="fas fa-search"></i></button>
             </form>            
             <ul class="nav-links">
