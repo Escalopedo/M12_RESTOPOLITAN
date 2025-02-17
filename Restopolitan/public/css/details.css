@@ -105,10 +105,6 @@ body {
     gap: 2rem;
 }
 
-.left-column {
-    /* Estilos adicionales para la columna izquierda si es necesario */
-}
-
 .right-column {
     text-align: center;
 }
