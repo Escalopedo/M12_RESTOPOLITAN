@@ -1,0 +1,75 @@
+/* Estilos para la vista de la lista de restaurantes */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2rem;
+}
+
+table {
+    width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+td img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.btn-warning {
+    background-color: #ffcc00;
+    color: #fff;
+}
+
+.btn-warning:hover {
+    background-color: #e6b800;
+}
+
+.btn-danger {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #e53935;
+}
+
+.alert-success {
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 10px 0;
+}
