@@ -6,7 +6,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AuthController;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;  // Asegúrate de tener esta línea para trabajar con Auth
+use Illuminate\Support\Facades\Auth;
 
 // Ruta para la página de inicio
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -42,10 +42,15 @@ Route::get('/search', function (Request $request) {
 Route::get('/admin', function () {
     // Verifica si el usuario está autenticado y tiene el rol 'Admin'
     if (Auth::check() && Auth::user()->role && Auth::user()->role->name === 'Admin') {
-        return view('admin'); // Redirige a la vista admin.blade.php
+        // Obtener todos los restaurantes
+        $restaurants = Restaurant::all(); // Esto obtiene todos los restaurantes de la base de datos
+        
+        // Pasar los restaurantes a la vista
+        return view('Admin', compact('restaurants')); // Asegúrate de pasar la variable correctamente
     }
 
     // Si no es admin, redirige con mensaje de error
     return redirect('/')->with('error', 'No tienes permisos para acceder a esta página');
 })->name('admin.index')->middleware('auth');
+
 
