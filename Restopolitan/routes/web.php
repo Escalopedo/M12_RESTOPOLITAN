@@ -55,6 +55,7 @@ Route::get('/admin', function () {
 
 
 
+
 // Rutas protegidas para administradores - Editar, Actualizar y Eliminar restaurante
 Route::group(['middleware' => ['auth']], function () {
     // Ruta para editar un restaurante
@@ -68,6 +69,10 @@ Route::group(['middleware' => ['auth']], function () {
 
         return redirect('/')->with('error', 'No tienes permisos para editar este restaurante');
     })->name('restaurants.edit');
+
+
+// ************************************************************************************************************************************************
+    
 
     // Ruta para actualizar el restaurante
     Route::put('/restaurants/{restaurant}', function (Request $request, $restaurantId) {
@@ -106,6 +111,10 @@ Route::group(['middleware' => ['auth']], function () {
 
         return redirect('/')->with('error', 'No tienes permisos para actualizar este restaurante');
     })->name('restaurants.update');
+    
+
+    // ************************************************************************************************************************************************
+
 
     // Ruta para eliminar un restaurante
     Route::delete('/restaurants/{restaurant}', function ($restaurantId) {
