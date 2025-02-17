@@ -32,11 +32,19 @@
                 @endguest
             
                 @auth
+
+                <!-- Si el usuario tiene el rol de Admin, mostramos el botón -->
+                @if(Auth::user()->role && Auth::user()->role->name === 'Admin')
+                        <li>
+                            <a href="{{ url('/admin') }}" class="btn btn-outline-light">Admin</a>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{ route('logout') }}" id="logout-button" class="btn btn-danger">
                             Cerrar sesión
                         </a>
                     </li>
+
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
@@ -46,10 +54,10 @@
     </nav>
     
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section" style="background-image: url('{{ asset('images/fondo.jpg') }}');">
         <div class="container text-center">
             <h1>LA SUSCRIPCIÓN PARA LOS AMANTES DE LA GASTRONOMÍA</h1>
-            <p>1 persona invitada en cada reserva</p>
+            <h2>1 persona invitada en cada reserva</h2>
             <p class="price">119 € / AÑO</p>
         </div>
     </section>
@@ -65,7 +73,8 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $restaurant->name }}</h5>
                             <p class="card-text">{{ $restaurant->description }}</p>
-                            <a href="{{ route('restaurants.details', $restaurant->id) }}" class="btn btn-outline-primary">Ver más</a>                        </div>
+                            <a href="{{ Auth::check() ? route('restaurant.show', $restaurant->id) : route('login') }}" class="btn btn-outline-primary">Ver más</a>
+                        </div>
                     </div>
                 </div>
             @endforeach
@@ -96,6 +105,27 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Siguiente</span>
                 </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Estadísticas con color gris y ancho completo -->
+    <section class="stats-section bg-gray py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">¿QUIERES SABER MÁS SOBRE RESTOPOLITAN?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="display-4">543.987</h3>
+                    <p class="lead">SOCIOS</p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="display-4">3.576</h3>
+                    <p class="lead">RESTAURANTES</p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="display-4">5</h3>
+                    <p class="lead">PAÍSES</p>
+                </div>
             </div>
         </div>
     </section>

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,5 +14,11 @@ class CuisineType extends Model
     public function restaurants()
     {
         return $this->belongsToMany(Restaurant::class, 'restaurant_cuisine_types');
+    }
+
+    // Relación muchos a muchos con platos (dishes)
+    public function dishes()
+    {
+        return $this->belongsToMany(Dish::class, 'dish_cuisine_types');
     }
 }
