@@ -7,35 +7,40 @@
     <title>Panel de Administración</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" class="logo">
             </a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    @auth
-                        <li class="nav-item">
-                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger">Cerrar sesión</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
-                    @endauth
-                </ul>
-            </div>
+            <ul class="nav-links">
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
+                    <li><a href="{{ route('register') }}" class="subscribe-btn">¡REGÍSTRATE!</a></li>
+                @endguest
+                @auth
+                    @if(Auth::user()->role && Auth::user()->role->name === 'Admin')
+                        <li><a href="{{ route('home') }}" class="btn btn-outline-light">Home</a></li>
+                    @endif
+                    <li>
+                        <a href="{{ route('logout') }}" id="logout-button" class="btn btn-danger">
+                            Cerrar sesión
+                        </a>
+                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                @endauth
+            </ul>            
         </div>
     </nav>
 
     <div class="container mt-5">
         <h1><strong>Panel de Administración</strong></h1>
 
-        <!-- Listado de Restaurantes -->
         <h4><strong>Restaurantes</strong></h4>
         <table class="table table-hover">
             <thead class="table-dark">
@@ -56,10 +61,10 @@
                         <td>{{ $restaurant->name }}</td>
                         <td>{{ $restaurant->description }}</td>
                         <td>{{ $restaurant->average_price }}€</td>
-                        <td>{{ $restaurant->gerente->name }}</td>
+                        <td>{{ $restaurant->gerente ? $restaurant->gerente->name : 'No asignado'}}</td>
                         <td>{{ $restaurant->location->street_address }}</td>
                         <td>
-                            <button class="btn btn-primary edit-restaurant" data-id="{{ $restaurant->id }}" data-bs-toggle="modal" data-bs-target="#editRestaurantModal">Editar</button>
+                            <button class="btn btn-primary edit-restaurant" data-id="{{ $restaurant->id }}">Editar</button>
                             <button class="btn btn-danger delete-restaurant" data-id="{{ $restaurant->id }}">Eliminar</button>
                         </td>
                     </tr>
@@ -67,52 +72,51 @@
             </tbody>
         </table>
 
-        <!-- Modal para Editar Restaurante -->
-        <div class="modal fade" id="editRestaurantModal" tabindex="-1" aria-labelledby="editRestaurantModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editRestaurantModalLabel">Editar Restaurante</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+<!-- Modal para Editar Restaurante -->
+<div class="modal fade" id="editRestaurantModal" tabindex="-1" aria-labelledby="editRestaurantModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editRestaurantModalLabel">Editar Restaurante</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="update-restaurant-form">
+                    <input type="hidden" id="restaurant-id">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" required>
                     </div>
-                    <div class="modal-body">
-                        <form id="update-restaurant-form">
-                            <input type="hidden" id="restaurant-id">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Descripción</label>
-                                <textarea class="form-control" id="description"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="average_price" class="form-label">Precio Promedio</label>
-                                <input type="number" class="form-control" id="average_price" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="gerente" class="form-label">Gerente</label>
-                                <select class="form-control" id="gerente" required>
-                                    @foreach($gerentes as $gerente)
-                                        <option value="{{ $gerente->id }}">{{ $gerente->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="location" class="form-label">Ubicación</label>
-                                <select class="form-control" id="location" required>
-                                    @foreach($locations as $location)
-                                        <option value="{{ $location->id }}">{{ $location->street_address }}, {{ $location->city }}, {{ $location->country }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-success">Actualizar Restaurante</button>
-                        </form>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="description"></textarea>
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label for="average_price" class="form-label">Precio Promedio</label>
+                        <input type="number" class="form-control" id="average_price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gerente" class="form-label">Gerente</label>
+                        <select class="form-control" id="gerente" required>
+                            @foreach($gerentes as $gerente)
+                                <option value="{{ $gerente->id }}">{{ $gerente->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Ubicación</label>
+                        <select class="form-control" id="location" required>
+                            @foreach($locations as $location)
+                                <option value="{{ $location->id }}">{{ $location->street_address }}, {{ $location->city }}, {{ $location->country }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Actualizar Restaurante</button>
+                </form>
             </div>
         </div>
-
+    </div>
+</div>
         <h4><strong>Usuarios</strong></h4>
         <table class="table table-hover">
             <thead class="table-dark">
@@ -120,8 +124,8 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Correo Electrónico</th>
-                    <th>Contraseña</th>
                     <th>Rol</th>
+                    <th>Contraseña</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -131,10 +135,10 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->password }}</td>
                         <td>{{ $user->role->name ?? 'No asignado' }}</td>
+                        <td>{{ $user->password }}</td>
                         <td>
-                            <button class="btn btn-primary edit-user" data-id="{{ $user->id }}" data-bs-toggle="modal" data-bs-target="#editUserModal">Editar</button>
+                            <button class="btn btn-primary edit-user" data-id="{{ $user->id }}">Editar</button>
                             <button class="btn btn-danger delete-user" data-id="{{ $user->id }}">Eliminar</button>
                         </td>
                     </tr>
@@ -142,8 +146,8 @@
             </tbody>
         </table>
 
-        <!-- Modal para Editar Usuario -->
-        <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+         <!-- Modal para Editar Usuario -->
+         <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -180,10 +184,46 @@
             </div>
         </div>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // EDITAR RESTAURANTE - Abrir modal con datos
-                document.querySelectorAll('.edit-restaurant').forEach(button => {
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // ELIMINAR RESTAURANTE
+            document.querySelectorAll('.delete-restaurant').forEach(button => {
+                button.addEventListener('click', function () {
+                    const restaurantId = this.dataset.id;
+                    Swal.fire({
+                        title: "¿Quieres eliminar este restaurante?",
+                        text: "¡No podrás revertir esta acción!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#d33",
+                        cancelButtonColor: "#3085d6",
+                        confirmButtonText: "Sí, eliminar",
+                        cancelButtonText: "Cancelar"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch(`/restaurants/${restaurantId}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                                }
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire('Eliminado', 'El restaurante ha sido eliminado', 'success');
+                                    document.getElementById(`restaurant-${restaurantId}`).remove();
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+
+            document.querySelectorAll('.edit-restaurant').forEach(button => {
                     button.addEventListener('click', function () {
                         const restaurantId = this.dataset.id;
                         fetch(`/restaurants/${restaurantId}/edit`)
@@ -235,8 +275,42 @@
                     });
                 });
 
-                // EDITAR USUARIO - Abrir modal con datos
-                document.querySelectorAll('.edit-user').forEach(button => {
+            // ELIMINAR USUARIO
+            document.querySelectorAll('.delete-user').forEach(button => {
+                button.addEventListener('click', function () {
+                    const userId = this.dataset.id;
+                    Swal.fire({
+                        title: "¿Quieres eliminar este usuario?",
+                        text: "¡No podrás revertir esta acción!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#d33",
+                        cancelButtonColor: "#3085d6",
+                        confirmButtonText: "Sí, eliminar",
+                        cancelButtonText: "Cancelar"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch(`/users/${userId}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                                }
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire('Eliminado', 'El usuario ha sido eliminado', 'success');
+                                    document.getElementById(`user-${userId}`).remove();
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+
+             // EDITAR USUARIO - Abrir modal con datos
+             document.querySelectorAll('.edit-user').forEach(button => {
                     button.addEventListener('click', function () {
                         const userId = this.dataset.id;
                         fetch(`/users/${userId}/edit`)
@@ -287,7 +361,6 @@
                     });
                 });
             });
-        </script>
-    </div>
+    </script>
 </body>
 </html>
