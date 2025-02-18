@@ -43,15 +43,11 @@ Para acceder al proyecto en tu entorno local, sigue estos pasos:
 
 1. **Clonar el repositorio**:
 
-   ```bash
-   git clone https://github.com/Escalopedo/M12_RESTOPOLITAN.git
-   ```
+   ```git clone https://github.com/Escalopedo/M12_RESTOPOLITAN.git```
 
 2. **Iniciar Laravel**:
 
-   ```bash
-php artisan serve
-```
+   ```php artisan serve```
 
 3. **Migraciones**:
 
