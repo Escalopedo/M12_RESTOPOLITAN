@@ -28,32 +28,30 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         return response()->json($user); // Devuelve los datos del usuario en formato JSON
     }
-
-    // Actualizar el usuario
+    
+    // Actualizar un usuario
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|min:6|confirmed',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
         $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-
-        if ($request->has('password') && $request->password) {
-            $user->password = Hash::make($request->password);
+    
+        // Validación
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'nullable|min:6',
+        ]);
+    
+        // Actualización
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->input('password'));
         }
-
         $user->save();
-
-        return response()->json(['success' => 'Usuario actualizado con éxito.']);
+    
+        return response()->json(['success' => true]);
     }
+    
 
     // Eliminar un usuario
     public function destroy($id)
