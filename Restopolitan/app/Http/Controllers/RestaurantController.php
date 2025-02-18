@@ -88,14 +88,36 @@ public function index()
     }
     
 
-    // Eliminar un restaurante
-    public function destroy($id)
-    {
+// Eliminar un restaurante y su ubicación asociada
+public function destroy($id)
+{
+    DB::beginTransaction();
+
+    try {
         $restaurant = Restaurant::findOrFail($id);
+
+        // Solo quiero eliminar en la transacción la location, no al usuario
+        // Relacion en la transacción
+        $location = $restaurant->location;
+
+        // Eliminar la ubicación (si existe)
+        if ($location) {
+            $location->delete();
+        }
+
+        // Eliminar el restaurante
         $restaurant->delete();
 
-        return response()->json(['success' => 'Restaurante eliminado con éxito.']);
+        DB::commit(); 
+
+        return response()->json(['success' => 'Restaurante y su ubicación eliminados con éxito.']);
+    } catch (\Exception $e) {
+        DB::rollBack(); 
+
+        return response()->json(['success' => false, 'message' => 'Error al eliminar el restaurante: ' . $e->getMessage()], 500);
     }
+}
+
 
     public function store(Request $request)
     {
