@@ -11,7 +11,7 @@
 <body>
     <div class="container mt-5">
         <h1>Panel de Administración</h1>
-
+        
         <!-- Listado de Restaurantes -->
         <h3>Restaurantes</h3>
         <table class="table table-hover">
