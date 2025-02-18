@@ -11,7 +11,47 @@
 <body>
     <div class="container mt-5">
         <h1>Panel de Administración</h1>
-        
+
+        <button id="add-restaurant-btn" class="btn btn-success mb-3">Añadir Restaurante</button>
+
+        <!-- Formulario para añadir un nuevo restaurante -->
+        <div id="add-restaurant-form" class="mt-5" style="display:none;">
+            <h3>Añadir Restaurante</h3>
+            <form id="create-restaurant-form">
+                <div class="mb-3">
+                    <label for="new-name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="new-name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="new-description" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="new-description" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="new-average-price" class="form-label">Precio Promedio</label>
+                    <input type="number" class="form-control" id="new-average-price" required>
+                </div>
+                <div class="mb-3">
+                    <label for="new-gerente" class="form-label">Gerente</label>
+                    <select class="form-control" id="new-gerente" required>
+                        @foreach($gerentes as $gerente)
+                            <option value="{{ $gerente->id }}">{{ $gerente->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="new-location" class="form-label">Ubicación</label>
+                    <select class="form-control" id="new-location" required>
+                        @foreach($locations as $location)
+                            <option value="{{ $location->id }}">{{ $location->street_address }}, {{ $location->city }}, {{ $location->country }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">Añadir Restaurante</button>
+                <button type="button" id="cancel-add" class="btn btn-secondary">Cancelar</button>
+            </form>
+        </div>
+
+
         <!-- Listado de Restaurantes -->
         <h3>Restaurantes</h3>
         <table class="table table-hover">
@@ -33,7 +73,7 @@
                         <td>{{ $restaurant->name }}</td>
                         <td>{{ $restaurant->description }}</td>
                         <td>{{ $restaurant->average_price }}€</td>
-                        <td>{{ $restaurant->gerente->name }}</td>
+                        <td>{{ $restaurant->gerente ? $restaurant->gerente->name : 'No asignado' }}</td>
                         <td>{{ $restaurant->location->street_address }}</td>
                         <td>
                             <button class="btn btn-primary edit-restaurant" data-id="{{ $restaurant->id }}">Editar</button>
@@ -152,6 +192,21 @@
         // RESTAURANTES
 
         document.addEventListener("DOMContentLoaded", function () {
+            
+            // AÑADIR RESTAURANTE:
+
+            document.getElementById('add-restaurant-btn').addEventListener('click', function () {
+                document.getElementById('add-restaurant-form').style.display = 'block';
+            });
+
+            document.getElementById('cancel-add').addEventListener('click', function () {
+                document.getElementById('add-restaurant-form').style.display = 'none';
+            });
+
+
+            
+
+            
             // Función para eliminar un restaurante
             document.querySelectorAll('.delete-restaurant').forEach(button => {
                 button.addEventListener('click', function () {
@@ -250,6 +305,9 @@
                 });
             });
 
+           
+           
+           
             // USUARIOS
 
             // Función para eliminar un usuario
