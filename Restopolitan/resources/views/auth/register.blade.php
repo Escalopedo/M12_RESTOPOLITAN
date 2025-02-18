@@ -49,21 +49,26 @@
         <form id="registrationForm" method="POST" action="{{ route('register') }}" class="hidden">
             <h3>Inscríbete con E-mail</h3>
             @csrf
-            <label>Nombre:</label>
-            <input type="text" name="name" id="name" onblur="validarNombre()">
-            <span id="errorNombre"></span><br>
-
-            <label>Email:</label>
-            <input type="email" name="email" id="email" onblur="validarCorreo()">
-            <span id="errorCorreo"></span><br>
+            <div class="form-group">
+                <div>
+                    <label>Nombre:</label>
+                    <input type="text" name="name" id="name" onblur="validarNombre()">
+                    <span id="errorNombre"></span>
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <input type="email" name="email" id="email" onblur="validarCorreo()">
+                    <span id="errorCorreo"></span>
+                </div>
+            </div>
 
             <label>Contraseña:</label>
             <input type="password" name="password" id="password" onblur="validarContrasena()">
-            <span id="errorContra"></span><br>
+            <span id="errorContra"></span><br><br>
 
             <label>Confirmar Contraseña:</label>
             <input type="password" name="password_confirmation" id="password_confirmation" onblur="validarConfirmarContrasena()">
-            <span id="errorConfirmar"></span><br>
+            <span id="errorConfirmar"></span><br><br>
 
             <button type="submit">Crear mi cuenta</button>
         </form>

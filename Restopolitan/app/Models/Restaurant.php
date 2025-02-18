@@ -10,6 +10,17 @@ class Restaurant extends Model
     use HasFactory;
 
     protected $table = 'restaurants'; // Tabla personalizada para los restaurantes
+    
+     // Propiedades que pueden ser asignadas masivamente
+     protected $fillable = [
+        'name',
+        'description',
+        'average_price',
+        'photo',
+        'gerente_id',
+        'location_id',
+        'rating' 
+    ];
 
     // Relación con el gerente (usuario)
     public function gerente()
@@ -27,5 +38,11 @@ class Restaurant extends Model
     public function cuisines()
     {
         return $this->belongsToMany(CuisineType::class, 'restaurant_cuisine_types');
+    }   
+
+    // Relación con la localización 
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'location_id');
     }
 }
