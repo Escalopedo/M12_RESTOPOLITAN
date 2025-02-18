@@ -14,10 +14,20 @@
 
 
 
+    <!-- SCRIPTS PARA CRUDS AJAX -->
+
+    <script src="{{ asset('js/deleteRestaurant.js') }}" defer></script>
+    <script src="{{ asset('js/editRestaurant.js') }}" defer></script>
+    <script src="{{ asset('js/addRestaurant.js') }}" defer></script>
+
     <script src="{{ asset('js/addUser.js') }}" defer></script>
     <script src="{{ asset('js/editUser.js') }}" defer></script>
+    <script src="{{ asset('js/deleteUser.js') }}" defer></script>
 
-    <script src="{{ asset('js/addRestaurant.js') }}" defer></script>
+    <!-- FILTROS -->
+
+    <script src="{{ asset('js/searchadmin.js') }}" defer></script>
+    <script src="{{ asset('js/admin.js') }}" defer></script>
 
 </head>
 <body>
@@ -429,10 +439,7 @@
                 });
             });
 
-             // EDITAR USUARIO - Abrir modal con datos
 
     </script>
-    <script src="{{ asset('js/searchadmin.js') }}" defer></script>
-    <script src="{{ asset('js/admin.js') }}" defer></script>
 </body>
 </html>
