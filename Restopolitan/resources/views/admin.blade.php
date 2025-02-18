@@ -7,6 +7,8 @@
     <title>Panel de Administración</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/deleteRestaurant.js') }}" defer></script>
+    
 </head>
 <body>
     <div class="container mt-5">
@@ -370,39 +372,7 @@
             });
 
             
-            // Función para eliminar un restaurante
-            document.querySelectorAll('.delete-restaurant').forEach(button => {
-                button.addEventListener('click', function () {
-                    const restaurantId = this.dataset.id;
-                    Swal.fire({
-                        title: "¿Quieres eliminar este restaurante?",
-                        text: "¡No podrás revertir esta acción!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#d33",
-                        cancelButtonColor: "#3085d6",
-                        confirmButtonText: "Sí, eliminar",
-                        cancelButtonText: "Cancelar"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            fetch(`/restaurants/${restaurantId}`, {
-                                method: 'DELETE',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                                }
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    Swal.fire('Eliminado', 'El restaurante ha sido eliminado', 'success');
-                                    document.getElementById(`restaurant-${restaurantId}`).remove();
-                                }
-                            });
-                        }
-                    });
-                });
-            });
+
 
             // Función para editar un restaurante
             document.querySelectorAll('.edit-restaurant').forEach(button => {
