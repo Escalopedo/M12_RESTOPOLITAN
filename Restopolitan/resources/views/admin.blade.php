@@ -19,6 +19,11 @@
     <script src="{{ asset('js/editUser.js') }}" defer></script>
     <script src="{{ asset('js/deleteUser.js') }}" defer></script>
 
+    <!-- FILTROS -->
+
+    <script src="{{ asset('js/searchadmin.js') }}" defer></script>
+    <script src="{{ asset('js/admin.js') }}" defer></script>
+
 </head>
 <body>
 
@@ -125,6 +130,36 @@
 
         <!-- Listado de Restaurantes -->
         <h3>Restaurantes</h3>
+
+
+        <!-- FILTROS -->
+
+        <div class="mb-3">
+            <form id="filter-restaurant-form">
+                <div class="row">
+                    <div class="col-md-2">
+                        <input type="text" id="filter-id" class="form-control" placeholder="ID">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" id="filter-name" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" id="filter-description" class="form-control" placeholder="Descripción">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" id="filter-price" class="form-control" placeholder="Precio Promedio">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" id="filter-gerente" class="form-control" placeholder="Gerente">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" id="filter-location" class="form-control" placeholder="Ubicación">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
         <table class="table table-hover">
             <thead class="table-dark">
                 <tr>
