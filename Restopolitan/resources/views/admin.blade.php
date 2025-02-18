@@ -60,7 +60,10 @@
     <div class="container mt-5">
         <h1><strong>Panel de Administración</strong></h1>
 
-        <button id="add-restaurant-btn" class="btn btn-success mb-3">RESTAURANTE NUEVO</button>
+        <div class="d-flex justify-content-end">
+            <button id="add-restaurant-btn" class="btn btn-success mb-3">RESTAURANTE NUEVO</button>
+            <button id="add-user-btn" class="btn btn-success mb-3 ms-2">USUARIO NUEVO</button>
+        </div>
 
         <!-- Formulario para añadir un nuevo restaurante -->
         <div id="add-restaurant-form" class="mt-5" style="display:none;">
@@ -98,8 +101,6 @@
                 <button type="button" id="cancel-add" class="btn btn-secondary">Cancelar</button>
             </form>
         </div>
-
-        <button id="add-user-btn" class="btn btn-success mb-3">Añadir Usuario</button>
 
         <!-- Formulario para añadir un nuevo usuario -->
         <div id="add-user-form" class="mt-5" style="display:none;">
