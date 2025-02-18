@@ -44,20 +44,24 @@ Para acceder al proyecto en tu entorno local, sigue estos pasos:
 1. **Clonar el repositorio**:
 
    ```bash
-   git clone https://github.com/usuario/repositorio.git
+   git clone https://github.com/Escalopedo/M12_RESTOPOLITAN.git
 
 2. **Iniciar Laravel**:
 
+   ```bash
 php artisan serve
 
 3. **Migraciones**:
 
+   ```bash
 php artisan migrate 
 
 4. **Seeders**:
 
+   ```bash
 php artisan db:seed
 
 5. **Credenciales**:
 
+   ```bash
 Todos los usuarios tienen qweQWE123 de contraseña.
