@@ -33,7 +33,7 @@
                         <td>{{ $restaurant->name }}</td>
                         <td>{{ $restaurant->description }}</td>
                         <td>{{ $restaurant->average_price }}€</td>
-                        <td>{{ $restaurant->gerente->name }}</td>
+                        <td>{{ $restaurant->gerente ? $restaurant->gerente->name : 'No asignado' }}</td>
                         <td>{{ $restaurant->location->street_address }}</td>
                         <td>
                             <button class="btn btn-primary edit-restaurant" data-id="{{ $restaurant->id }}">Editar</button>
