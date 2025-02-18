@@ -29,6 +29,14 @@
                         <option value="{{ $cuisine->name }}">{{ $cuisine->name }}</option>
                     @endforeach
                 </select>
+                <select class="form-control" id="rating-selector">
+                    <option value="">Valoración</option>
+                    <option value="1">⭐ 1+</option>
+                    <option value="2">⭐ 2+</option>
+                    <option value="3">⭐ 3+</option>
+                    <option value="4">⭐ 4+</option>
+                    <option value="5">⭐ 5</option>
+                </select>
                 <button type="submit" class="btn"><i class="fas fa-search"></i></button>
             </form>            
             <ul class="nav-links">
