@@ -18,13 +18,15 @@ class AdminController extends Controller
         
         // Obtener los usuarios con el rol de "gerente"
         $gerentes = User::whereHas('role', function ($query) {
-            $query->where('name', 'gerente'); // Filtrar por el rol "gerente"
+            $query->where('name', 'gerente'); 
         })->get();
         
         // Obtener todas las ubicaciones
         $locations = Location::all();
+
+        $roles = Role::all();
         
         // Pasar los datos a la vista
-        return view('admin', compact('users','restaurants', 'gerentes', 'locations'));
+        return view('admin', compact('users','restaurants', 'gerentes', 'locations','roles'));
     }
 }
