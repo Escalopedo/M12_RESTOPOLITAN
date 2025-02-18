@@ -7,6 +7,9 @@
     <title>Panel de Administración</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- SCRIPTS PARA CRUDS AJAX -->
+
     <script src="{{ asset('js/deleteRestaurant.js') }}" defer></script>
     <script src="{{ asset('js/editRestaurant.js') }}" defer></script>
     <script src="{{ asset('js/addRestaurant.js') }}" defer></script>
@@ -14,10 +17,6 @@
     <script src="{{ asset('js/addUser.js') }}" defer></script>
     <script src="{{ asset('js/editUser.js') }}" defer></script>
     <script src="{{ asset('js/deleteUser.js') }}" defer></script>
-
-
-
-
 
 </head>
 <body>

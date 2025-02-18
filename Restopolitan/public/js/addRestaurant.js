@@ -1,25 +1,24 @@
             
-            // AÑADIR RESTAURANTE 
+// AÑADIR RESTAURANTE 
+document.getElementById('add-restaurant-btn').addEventListener('click', function () {
+    document.getElementById('add-restaurant-form').style.display = 'block';
+});
 
-            document.getElementById('add-restaurant-btn').addEventListener('click', function () {
-                document.getElementById('add-restaurant-form').style.display = 'block';
-            });
+document.getElementById('cancel-add').addEventListener('click', function () {
+    document.getElementById('add-restaurant-form').style.display = 'none';
+});
 
-            document.getElementById('cancel-add').addEventListener('click', function () {
-                document.getElementById('add-restaurant-form').style.display = 'none';
-            });
+    document.getElementById('create-restaurant-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Evita el envío del formulario tradicional
 
-            document.getElementById('create-restaurant-form').addEventListener('submit', function (event) {
-                event.preventDefault(); // Evita el envío del formulario tradicional
+            // Obtener los datos del formulario
+            const name = document.getElementById('new-name').value;
+            const description = document.getElementById('new-description').value;
+            const average_price = document.getElementById('new-average-price').value;
+            const gerente_id = document.getElementById('new-gerente').value;
+            const location_id = document.getElementById('new-location').value;
 
-                // Obtener los datos del formulario
-                const name = document.getElementById('new-name').value;
-                const description = document.getElementById('new-description').value;
-                const average_price = document.getElementById('new-average-price').value;
-                const gerente_id = document.getElementById('new-gerente').value;
-                const location_id = document.getElementById('new-location').value;
-
-                // Enviar la solicitud AJAX para crear un nuevo restaurante
+            // Enviar la solicitud AJAX para crear un nuevo restaurante
                 fetch('/restaurants', {
                     method: 'POST',
                     headers: {
@@ -65,6 +64,6 @@
                     console.error('Error al crear el restaurante:', error);
                     Swal.fire('Error', 'Hubo un problema al crear el restaurante.', 'error');
                 });
-            });
+    });
 
             
