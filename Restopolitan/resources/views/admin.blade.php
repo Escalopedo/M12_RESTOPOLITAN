@@ -12,13 +12,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
     <!-- SCRIPTS PARA CRUDS AJAX -->
 
-    <script src="{{ asset('js/deleteRestaurant.js') }}" defer></script>
-    <script src="{{ asset('js/editRestaurant.js') }}" defer></script>
     <script src="{{ asset('js/addRestaurant.js') }}" defer></script>
+    <script src="{{ asset('js/editRestaurant.js') }}" defer></script>
+    <script src="{{ asset('js/deleteRestaurant.js') }}" defer></script>
+
 
     <script src="{{ asset('js/addUser.js') }}" defer></script>
     <script src="{{ asset('js/editUser.js') }}" defer></script>
@@ -316,9 +315,7 @@
             </div>
         </div>
 
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        <script>
             // ELIMINAR RESTAURANTE
             document.querySelectorAll('.delete-restaurant').forEach(button => {
                 button.addEventListener('click', function () {
@@ -334,7 +331,7 @@
                         cancelButtonText: "Cancelar"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            fetch(`/restaurants/${restaurantId}`, {
+                            fetch(/restaurants/${restaurantId}`, {
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -345,7 +342,7 @@
                             .then(data => {
                                 if (data.success) {
                                     Swal.fire('Eliminado', 'El restaurante ha sido eliminado', 'success');
-                                    document.getElementById(`restaurant-${restaurantId}`).remove();
+                                    document.getElementById(restaurant-${restaurantId}).remove();
                                 }
                             });
                         }
@@ -353,59 +350,7 @@
                 });
             });
 
-            document.querySelectorAll('.edit-restaurant').forEach(button => {
-                    button.addEventListener('click', function () {
-                        const restaurantId = this.dataset.id;
-                        fetch(`/restaurants/${restaurantId}/edit`)
-                            .then(response => response.json())
-                            .then(data => {
-                                document.getElementById('restaurant-id').value = data.id;
-                                document.getElementById('name').value = data.name;
-                                document.getElementById('description').value = data.description;
-                                document.getElementById('average_price').value = data.average_price;
-                                document.getElementById('gerente').value = data.gerente_id;
-                                document.getElementById('location').value = data.location_id;
-                                new bootstrap.Modal(document.getElementById('editRestaurantModal')).show();
-                            });
-                    });
-                });
+        </script>
 
-                // ACTUALIZAR RESTAURANTE
-                document.getElementById('update-restaurant-form').addEventListener('submit', function (event) {
-                    event.preventDefault();
-                    const restaurantId = document.getElementById('restaurant-id').value;
-                    fetch(`/restaurants/${restaurantId}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        },
-                        body: JSON.stringify({
-                            name: document.getElementById('name').value,
-                            description: document.getElementById('description').value,
-                            average_price: document.getElementById('average_price').value,
-                            gerente_id: document.getElementById('gerente').value,
-                            location_id: document.getElementById('location').value
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            document.getElementById('editRestaurantModal').querySelector('.btn-close').click();
-                            Swal.fire({
-                                title: "Actualizado",
-                                text: "El restaurante ha sido actualizado con éxito",
-                                icon: "success",
-                                confirmButtonText: "Aceptar",
-                                allowOutsideClick: false
-                            }).then(() => {
-                                location.reload();
-                            });
-                        }
-                    });
-                });
-
-
-    </script>
 </body>
 </html>
