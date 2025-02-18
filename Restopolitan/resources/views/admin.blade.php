@@ -26,7 +26,7 @@
         <!-- FILTROS -->
     
         <script src="{{ asset('js/searchadmin.js') }}" defer></script>
-        <script src="{{ asset('js/admin.js') }}" defer></script>
+        <script src="{{ asset('js/searchrestaurants.js') }}" defer></script>
     
     </head>
 <body>
@@ -99,7 +99,7 @@
             </form>
         </div>
 
-        <button id="add-user-btn" class="btn btn-success mb-3">Añadir Usuario</button>
+        <button id="add-user-btn" class="btn btn-success mb-3">AÑADIR USUARIO</button>
 
         <!-- Formulario para añadir un nuevo usuario -->
         <div id="add-user-form" class="mt-5" style="display:none;">
@@ -132,9 +132,23 @@
 
 
         <h4><strong>Restaurantes</strong></h4>
-
-        
-
+        <div class="row mb-3">
+            <div class="col-md-2">
+                <input type="text" id="restaurant-name-filter" class="form-control" placeholder="Filtrar por nombre...">
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control" id="min_price" placeholder="Precio Mínimo">
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control" id="max_price" placeholder="Precio Máximo">
+            </div>
+            <div class="col-md-2">
+                <input type="text" id="restaurant-gerente-filter" class="form-control" placeholder="Filtrar por gerente...">
+            </div>
+            <div class="col-md-2">
+                <input type="text" id="restaurant-location-filter" class="form-control" placeholder="Filtrar por ubicación...">
+            </div>
+        </div>
         <table class="table table-hover">
             <thead class="table-dark">
                 <tr>
