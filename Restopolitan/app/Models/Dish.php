@@ -1,4 +1,8 @@
 <?php
+<<<<<<< HEAD
+=======
+
+>>>>>>> 01a45f78ed7b229cca68ae8930eba4f06fe738da
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
