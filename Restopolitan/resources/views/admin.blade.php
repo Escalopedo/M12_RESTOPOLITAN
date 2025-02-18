@@ -105,8 +105,8 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->password }}</td>
                         <td>{{ $user->role->name ?? 'No asignado' }}</td>
+                        <td>{{ $user->password }}</td>
                         <td>
                             <button class="btn btn-primary edit-user" data-id="{{ $user->id }}">Editar</button>
                             <button class="btn btn-danger delete-user" data-id="{{ $user->id }}">Eliminar</button>
@@ -128,6 +128,14 @@
                 <div class="mb-3">
                     <label for="user-email" class="form-label">Correo Electrónico</label>
                     <input type="email" class="form-control" id="user-email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="user-role" class="form-label">Rol</label>
+                    <select class="form-control" id="user-role" required>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="user-password" class="form-label">Contraseña</label>
@@ -305,6 +313,7 @@
                 const name = document.getElementById('user-name').value;
                 const email = document.getElementById('user-email').value;
                 const password = document.getElementById('user-password').value;
+                const roleId = document.getElementById('user-role').value; 
 
                 fetch(`/users/${userId}`, {
                     method: 'PUT',
@@ -315,7 +324,8 @@
                     body: JSON.stringify({
                         name: name,
                         email: email,
-                        password: password
+                        password: password,
+                        role_id: roleId
                     })
                 })
                 .then(response => response.json())
@@ -324,6 +334,13 @@
                         const userRow = document.getElementById(`user-${userId}`);
                         userRow.querySelector('td:nth-child(2)').textContent = name;
                         userRow.querySelector('td:nth-child(3)').textContent = email;
+
+                        const roleName = data.role_name; // Asegúrate de que el backend devuelva el nombre del rol actualizado
+                        userRow.querySelector('td:nth-child(4)').textContent = roleName;
+
+                        const roleSelect = document.getElementById('user-role');
+                        roleSelect.value = roleId; // Actualiza el valor del select al nuevo rol
+
 
                         document.getElementById('edit-user-form').style.display = 'none';
                         Swal.fire('Actualizado', 'El usuario ha sido actualizado con éxito', 'success');
