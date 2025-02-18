@@ -1,7 +1,7 @@
 /* Estilos generales */
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
@@ -197,35 +197,6 @@ button[type="submit"]:hover {
 }
 
 
-/* Botón de inicio de sesión con Facebook */
-
-.fb-login {
-    background-color: #3b5998;
-    color: white;
-    font-weight: bold;
-    border: none;
-    padding: 12px;
-    width: 100%;
-    border-radius: 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-.fb-login:hover {
-    background-color: #2d4373;
-}
-
-.fb-login img {
-    width: 20px;
-    height: 20px;
-}
-
-
 /* Enlace de registro */
 
 .register-link {
@@ -250,4 +221,68 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}
+
+.alert.alert-danger {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.alert.alert-danger ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    body {
+        height: 70vh;
+    }
+    .navbar {
+        height: 30px;
+    }
+    .navbar-container {
+        max-width: 1200px;
+        margin-top: 5px;
+        margin-left: 120px;
+        justify-content: space-between;
+    }
+    h2 {
+        font-size: 20px;
+        color: #1a1a3b;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+    h3 {
+        font-size: 15px;
+        color: #1a1a3b;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+    .errorNombre {
+        font-size: 12px;
+    }
+    .errorCorreo {
+        font-size: 12px;
+    }
+    .errorContra {
+        font-size: 12px;
+    }
+    .errorConfirmar {
+        font-size: 12px;
+    }
+    .container {
+        background: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
 }

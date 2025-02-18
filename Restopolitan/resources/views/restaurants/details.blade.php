@@ -10,17 +10,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- CSS Personalizado -->
     <link rel="stylesheet" href="{{ asset('css/details.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" width="150">
+                <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" class="logo">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     @auth
@@ -75,10 +74,11 @@
                         </div>
                     </div>                    
                     @auth
+                    <div class="valo">
                         <h4 class="mt-4">Deja tu valoración</h4>
                         <form action="{{ route('reviews.store', $restaurant->id) }}" method="POST">
                             @csrf
-                            <div class="mb-3">
+                            <div class="mb-3 ">
                                 <label for="rating" class="form-label">Valoración</label>
                                 <div class="star-rating">
                                     @for ($i = 1; $i <= 5; $i++)
@@ -93,6 +93,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Enviar valoración</button>
                         </form>
+                    </div>
                     @endauth
                 </div>
             </div>

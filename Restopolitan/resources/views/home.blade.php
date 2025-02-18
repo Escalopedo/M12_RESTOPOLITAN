@@ -21,6 +21,34 @@
             <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" width="150">
             </a>
+            <ul class="nav-links">
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
+                    <li><a href="{{ route('register') }}" class="subscribe-btn">¡REGÍSTRATE!</a></li>
+                @endguest
+            
+                @auth
+
+                <!-- Si el usuario tiene el rol de Admin, mostramos el botón -->
+                @if(Auth::user()->role && Auth::user()->role->name === 'Admin')
+                        <li>
+                            <a href="{{ url('/admin') }}" class="btn btn-outline-light">Admin</a>
+                        </li>
+                    @endif
+                    <li>
+                        <button id="clear-filters" class="btn btn-filtro">Limpiar Filtros</button>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}" id="logout-button" class="btn btn-danger">
+                            Cerrar sesión
+                        </a>
+                    </li>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                @endauth
+            </ul>     
             @auth
             <form class="search-form" id="search-form">
                 <input type="text" class="form-control" id="search-input" placeholder="Buscar por nombre...">
@@ -52,34 +80,7 @@
                     <input type="number" class="form-control" id="max_price" disabled>
                 </form>
             @endguest
-            <ul class="nav-links">
-                @guest
-                    <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
-                    <li><a href="{{ route('register') }}" class="subscribe-btn">¡REGÍSTRATE!</a></li>
-                @endguest
-            
-                @auth
-
-                <!-- Si el usuario tiene el rol de Admin, mostramos el botón -->
-                @if(Auth::user()->role && Auth::user()->role->name === 'Admin')
-                        <li>
-                            <a href="{{ url('/admin') }}" class="btn btn-outline-light">Admin</a>
-                        </li>
-                    @endif
-                    <li>
-                        <button id="clear-filters" class="btn btn-warning">Limpiar Filtros</button>
-                    </li>
-                    <li>
-                        <a href="{{ route('logout') }}" id="logout-button" class="btn btn-danger">
-                            Cerrar sesión
-                        </a>
-                    </li>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                @endauth
-            </ul>            
+                   
         </div>
     </nav>
     
@@ -191,6 +192,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/logout.js') }}"></script>
-    <script src="{{ asset('js/search.js') }}" defer></script>
+    <script src="{{ asset('js/search.js') }}"></script>
 </body>
 </html>
