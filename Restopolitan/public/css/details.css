@@ -27,6 +27,10 @@ body {
     margin-right: 1rem;
 }
 
+.logo {
+    width: 150px;
+}
+
 .search-form {
     display: flex;
     align-items: center;
@@ -147,4 +151,32 @@ body {
     background-color: rgba(81, 81, 138, 0.5);
     /* Azul con opacidad */
     z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        border-right: 2px solid #ccc;
+        padding-right: 1rem;
+        margin-right: 1rem;
+    }
+    .overlay-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        color: #fff;
+        z-index: 2;
+        margin-left: 20px;
+    }
+    .valo {
+        margin-left: 20px;
+    }
+    .logo {
+        margin-left: 110px;
+    }
 }

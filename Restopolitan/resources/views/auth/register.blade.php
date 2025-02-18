@@ -53,22 +53,22 @@
                 <div>
                     <label>Nombre:</label>
                     <input type="text" name="name" id="name" onblur="validarNombre()">
-                    <span id="errorNombre"></span>
+                    <span id="errorNombre" class="errorNombre"></span>
                 </div>
                 <div>
                     <label>Email:</label>
                     <input type="email" name="email" id="email" onblur="validarCorreo()">
-                    <span id="errorCorreo"></span>
+                    <span id="errorCorreo" class="errorCorreo"></span>
                 </div>
             </div>
 
             <label>Contraseña:</label>
             <input type="password" name="password" id="password" onblur="validarContrasena()">
-            <span id="errorContra"></span><br><br>
+            <span id="errorContra" class="errorContra"></span><br><br>
 
             <label>Confirmar Contraseña:</label>
             <input type="password" name="password_confirmation" id="password_confirmation" onblur="validarConfirmarContrasena()">
-            <span id="errorConfirmar"></span><br><br>
+            <span id="errorConfirmar" class="errorConfirmar"></span><br><br>
 
             <button type="submit">Crear mi cuenta</button>
         </form>
