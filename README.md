@@ -48,8 +48,7 @@ Para acceder al proyecto en tu entorno local, sigue estos pasos:
 
 2. **Iniciar Laravel**:
 
-   ```bash
-php artisan serve
+   ```bash php artisan serve
 
 3. **Migraciones**:
 
