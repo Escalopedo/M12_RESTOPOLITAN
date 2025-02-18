@@ -49,5 +49,6 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/restaurants/{restaurant}', [RestaurantController::class, 'destroy'])->name('restaurants.destroy');
         Route::post('/restaurants', [RestaurantController::class, 'store'])->name('restaurants.store');
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::delete('/users/{id}', [UserController::class, 'destroy']);
     });
 });

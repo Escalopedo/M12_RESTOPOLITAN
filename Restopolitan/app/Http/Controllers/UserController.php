@@ -61,25 +61,26 @@ class UserController extends Controller
 
     // Eliminar un usuario
     public function destroy($id)
-        {
-            DB::beginTransaction(); // Inicia la transacción
-        
-            try {
-                $user = User::findOrFail($id);
-        
-                $user->reviews()->delete(); 
-        
-                $user->delete();
-        
-                DB::commit(); // Confirma la transacción si todo ha ido bien
-        
-                return response()->json(['success' => 'Usuario y sus reseñas eliminados con éxito.']);
-            } catch (\Exception $e) {
-                DB::rollBack(); // Si ocurre un error, revertimos la transacción
-        
-                return response()->json(['success' => false, 'message' => 'Error al eliminar el usuario: ' . $e->getMessage()], 500);
-            }
+    {
+        DB::beginTransaction(); 
+
+        try {
+            $user = User::withTrashed()->findOrFail($id);
+
+            $user->reviews()->forceDelete(); 
+
+            $user->forceDelete();
+
+            DB::commit(); // Confirma la transacción si todo ha ido bien
+
+            return response()->json(['success' => 'Usuario y sus reseñas eliminados con éxito.']);
+        } catch (\Exception $e) {
+            DB::rollBack(); 
+
+            return response()->json(['success' => false, 'message' => 'Error al eliminar el usuario: ' . $e->getMessage()], 500);
         }
+    }
+
     
 
 
