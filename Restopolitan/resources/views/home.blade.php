@@ -22,7 +22,13 @@
             <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" width="150">
             </a>
             <form class="search-form" id="search-form">
-                <input type="text" class="form-control" id="-searchinput" placeholder="Búsqueda por nombre, precio, valoración, tipo de cocina...">
+                <input type="text" class="form-control" id="search-input" placeholder="Buscar por nombre...">
+                <select class="form-control" id="cuisine-selector">
+                    <option value="">Todos los tipos de cocina</option>
+                    @foreach($cuisineTypes as $cuisine)
+                        <option value="{{ $cuisine->name }}">{{ $cuisine->name }}</option>
+                    @endforeach
+                </select>
                 <button type="submit" class="btn"><i class="fas fa-search"></i></button>
             </form>            
             <ul class="nav-links">
@@ -132,6 +138,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/logout.js') }}"></script>
-    <script src="{{ asset('js/search.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}" defer></script>
 </body>
 </html>
