@@ -10,7 +10,7 @@ class RestaurantController extends Controller
     // Mostrar la lista de restaurantes
     public function index()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::with(['gerente', 'location'])->get();
         return view('admin', compact('restaurants'));
     }
 
@@ -28,6 +28,8 @@ class RestaurantController extends Controller
             'name' => 'required',
             'description' => 'nullable',
             'average_price' => 'required|numeric',
+            'gerente_id' => 'nullable',
+            'location_id' => 'required',
         ]);
 
         $restaurant = Restaurant::findOrFail($id);
