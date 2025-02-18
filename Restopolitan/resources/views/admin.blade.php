@@ -40,33 +40,27 @@
             </tbody>
         </table>
 
-        <!-- Listado de Usuarios -->
-        <h3>Usuarios</h3>
-        <table class="table table-hover">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Correo Electrónico</th>
-                    <th>Rol</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="user-list">
-                @foreach($users as $user)
-                    <tr id="user-{{ $user->id }}">
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->role->name ?? 'No asignado' }}</td>
-                        <td>
-                            <button class="btn btn-primary edit-user" data-id="{{ $user->id }}">Editar</button>
-                            <button class="btn btn-danger delete-user" data-id="{{ $user->id }}">Eliminar</button>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <!-- Formulario para editar un restaurante -->
+        <div id="edit-restaurant-form" class="mt-5" style="display:none;">
+            <h3>Editar Restaurante</h3>
+            <form id="update-restaurant-form">
+                <input type="hidden" id="restaurant-id">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="average_price" class="form-label">Precio Promedio</label>
+                    <input type="number" class="form-control" id="average_price" required>
+                </div>
+                <button type="submit" class="btn btn-success">Actualizar Restaurante</button>
+                <button type="button" id="cancel-edit" class="btn btn-secondary">Cancelar</button>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -112,56 +106,58 @@
                     fetch(`/restaurants/${restaurantId}/edit`)
                         .then(response => response.json())
                         .then(data => {
-                            // Aquí puedes llenar un formulario para editar el restaurante
-                            console.log(data); // Los datos del restaurante para editar
+                            // Mostrar el formulario de edición y cargar los datos
+                            document.getElementById('restaurant-id').value = data.id;
+                            document.getElementById('name').value = data.name;
+                            document.getElementById('description').value = data.description;
+                            document.getElementById('average_price').value = data.average_price;
+
+                            // Mostrar el formulario de edición
+                            document.getElementById('edit-restaurant-form').style.display = 'block';
                         });
                 });
             });
 
-            // Función para eliminar un usuario
-            document.querySelectorAll('.delete-user').forEach(button => {
-                button.addEventListener('click', function () {
-                    const userId = this.dataset.id;
-                    Swal.fire({
-                        title: "¿Quieres eliminar este usuario?",
-                        text: "¡No podrás revertir esta acción!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#d33",
-                        cancelButtonColor: "#3085d6",
-                        confirmButtonText: "Sí, eliminar",
-                        cancelButtonText: "Cancelar"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            fetch(`/users/${userId}`, {
-                                method: 'DELETE',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                                }
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    Swal.fire('Eliminado', 'El usuario ha sido eliminado', 'success');
-                                    document.getElementById(`user-${userId}`).remove();
-                                }
-                            });
-                        }
-                    });
-                });
+            // Función para cancelar la edición
+            document.getElementById('cancel-edit').addEventListener('click', function () {
+                document.getElementById('edit-restaurant-form').style.display = 'none';
             });
 
-            // Función para editar un usuario
-            document.querySelectorAll('.edit-user').forEach(button => {
-                button.addEventListener('click', function () {
-                    const userId = this.dataset.id;
-                    fetch(`/users/${userId}/edit`)
-                        .then(response => response.json())
-                        .then(data => {
-                            // Aquí puedes llenar un formulario para editar el usuario
-                            console.log(data); // Los datos del usuario para editar
-                        });
+            // Función para enviar el formulario de actualización
+            document.getElementById('update-restaurant-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const restaurantId = document.getElementById('restaurant-id').value;
+                const name = document.getElementById('name').value;
+                const description = document.getElementById('description').value;
+                const average_price = document.getElementById('average_price').value;
+
+                fetch(`/restaurants/${restaurantId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        description: description,
+                        average_price: average_price
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Actualizar los datos del restaurante directamente en la tabla
+                        const restaurantRow = document.getElementById(`restaurant-${restaurantId}`);
+                        restaurantRow.querySelector('td:nth-child(2)').textContent = name;
+                        restaurantRow.querySelector('td:nth-child(3)').textContent = description;
+                        restaurantRow.querySelector('td:nth-child(4)').textContent = `${average_price}€`;
+
+                        // Ocultar el formulario de edición
+                        document.getElementById('edit-restaurant-form').style.display = 'none';
+
+                        Swal.fire('Actualizado', 'El restaurante ha sido actualizado con éxito', 'success');
+                    }
                 });
             });
         });
