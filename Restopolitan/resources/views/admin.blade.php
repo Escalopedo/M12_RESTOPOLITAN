@@ -184,6 +184,8 @@
                             document.getElementById('name').value = data.name;
                             document.getElementById('description').value = data.description;
                             document.getElementById('average_price').value = data.average_price;
+                            document.getElementById('gerente').value = data.gerente_id;
+                            document.getElementById('location').value = data.location_id;
                             document.getElementById('edit-restaurant-form').style.display = 'block';
                         });
                 });
@@ -194,7 +196,6 @@
                 document.getElementById('edit-restaurant-form').style.display = 'none';
             });
 
-            // Función para enviar el formulario de actualización del restaurante
             document.getElementById('update-restaurant-form').addEventListener('submit', function (event) {
                 event.preventDefault();
 
@@ -202,6 +203,8 @@
                 const name = document.getElementById('name').value;
                 const description = document.getElementById('description').value;
                 const average_price = document.getElementById('average_price').value;
+                const gerente_id = document.getElementById('gerente').value;
+                const location_id = document.getElementById('location').value;
 
                 fetch(`/restaurants/${restaurantId}`, {
                     method: 'PUT',
@@ -212,7 +215,9 @@
                     body: JSON.stringify({
                         name: name,
                         description: description,
-                        average_price: average_price
+                        average_price: average_price,
+                        gerente_id: gerente_id,
+                        location_id: location_id
                     })
                 })
                 .then(response => response.json())
@@ -222,6 +227,8 @@
                         restaurantRow.querySelector('td:nth-child(2)').textContent = name;
                         restaurantRow.querySelector('td:nth-child(3)').textContent = description;
                         restaurantRow.querySelector('td:nth-child(4)').textContent = `${average_price}€`;
+                        restaurantRow.querySelector('td:nth-child(5)').textContent = document.getElementById('gerente').selectedOptions[0].text; // Mostrar el gerente actualizado
+                        restaurantRow.querySelector('td:nth-child(6)').textContent = document.getElementById('location').selectedOptions[0].text; // Mostrar la ubicación actualizada
 
                         document.getElementById('edit-restaurant-form').style.display = 'none';
                         Swal.fire('Actualizado', 'El restaurante ha sido actualizado con éxito', 'success');

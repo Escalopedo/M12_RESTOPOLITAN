@@ -31,15 +31,18 @@ class RestaurantController extends Controller
             'gerente_id' => 'nullable',
             'location_id' => 'required',
         ]);
-
+    
         $restaurant = Restaurant::findOrFail($id);
         $restaurant->name = $request->name;
         $restaurant->description = $request->description;
         $restaurant->average_price = $request->average_price;
+        $restaurant->gerente_id = $request->gerente_id;
+        $restaurant->location_id = $request->location_id;
         $restaurant->save();
-
+    
         return response()->json(['success' => 'Restaurante actualizado con éxito.']);
     }
+    
 
     // Eliminar un restaurante
     public function destroy($id)
