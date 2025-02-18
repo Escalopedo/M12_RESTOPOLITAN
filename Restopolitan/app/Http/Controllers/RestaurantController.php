@@ -7,11 +7,48 @@ use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
-    // Mostrar la lista de restaurantes
-    public function index()
+public function index()
     {
-        $restaurants = Restaurant::with(['gerente', 'location'])->get();
-        return view('admin', compact('restaurants'));
+        $restaurants = Restaurant::all(); // Obtienes todos los restaurantes
+        $cuisineTypes = CuisineType::all();
+        return view('restaurants.index', compact('restaurants','cuisineTypes')); // Pasas los restaurantes a la vista
+    }
+
+    public function search(Request $request)
+    {
+        $query = Restaurant::join('restaurant_cuisine_types', 'restaurants.id', '=', 'restaurant_cuisine_types.restaurant_id')
+            ->join('cuisine_types', 'restaurant_cuisine_types.cuisine_type_id', '=', 'cuisine_types.id')
+            ->leftJoin('reviews', 'restaurants.id', '=', 'reviews.restaurant_id')
+            ->select(
+                'restaurants.*', //Muestra los datos de la tabla restaurants
+                DB::raw("GROUP_CONCAT(DISTINCT cuisine_types.name SEPARATOR ', ') as cuisine_name"), //Obtiene el nombre del tipo de cocina
+                DB::raw('COALESCE(AVG(reviews.rating), 0) as avg_rating') //Calcula la media de las valoraciones (AVG(reviews.rating)) y si su valor es null devuelve 0:
+            )
+            ->groupBy('restaurants.id'); //Esto evita que se dupliquen los resultados cuando se filtra
+
+        if ($request->has('name') && !empty($request->input('name'))) {
+            $query->where('restaurants.name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        if ($request->has('cuisine') && !empty($request->input('cuisine'))) {
+            $query->having('cuisine_name', 'like', "%" . $request->input('cuisine') . "%");
+        }
+
+        if ($request->has('min_rating') && is_numeric($request->input('min_rating'))) {
+            $query->having('avg_rating', '>=', (float) $request->input('min_rating'));
+        }
+
+        if ($request->has('min_price') && is_numeric($request->input('min_price'))) {
+            $query->where('restaurants.average_price', '>=', (float) $request->input('min_price'));
+        }
+    
+        if ($request->has('max_price') && is_numeric($request->input('max_price'))) {
+            $query->where('restaurants.average_price', '<=', (float) $request->input('max_price'));
+        }
+
+        $restaurants = $query->get();
+
+        return view('partials.restaurants', compact('restaurants'));
     }
 
     public function show($id)
@@ -58,4 +95,5 @@ class RestaurantController extends Controller
 
         return response()->json(['success' => 'Restaurante eliminado con éxito.']);
     }
+
 }
