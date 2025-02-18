@@ -1,8 +1,8 @@
-            // Función para eliminar un restaurante
-            document.querySelectorAll('.delete-restaurant').forEach(button => {
-                button.addEventListener('click', function () {
-                    const restaurantId = this.dataset.id;
-                    Swal.fire({
+// Función para eliminar un restaurante
+document.querySelectorAll('.delete-restaurant').forEach(button => {
+    button.addEventListener('click', function () {
+        const restaurantId = this.dataset.id;
+            Swal.fire({
                         title: "¿Quieres eliminar este restaurante?",
                         text: "¡No podrás revertir esta acción!",
                         icon: "warning",
@@ -29,5 +29,5 @@
                             });
                         }
                     });
-                });
-            });
+    });
+ });
