@@ -19,7 +19,7 @@
     <nav class="navbar">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" width="150">
+            <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" class="logo">
             </a>
             @auth
             <form class="search-form" id="search-form">
@@ -103,7 +103,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $restaurant->name }}</h5>
                             <p class="card-text">{{ $restaurant->description }}</p>
+                            @auth
                             <a href="{{ route('restaurants.details', $restaurant->id) }}" class="btn btn-outline-primary">Ver más</a>
+                            @endauth
                         </div>
                     </div>
                 </div>
