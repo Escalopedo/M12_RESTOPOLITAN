@@ -95,6 +95,7 @@
                     <th>Nombre</th>
                     <th>Correo Electrónico</th>
                     <th>Rol</th>
+                    <th>Contraseña</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -104,6 +105,7 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>{{ $user->password }}</td>
                         <td>{{ $user->role->name ?? 'No asignado' }}</td>
                         <td>
                             <button class="btn btn-primary edit-user" data-id="{{ $user->id }}">Editar</button>
@@ -138,6 +140,9 @@
     </div>
 
     <script>
+        
+        // RESTAURANTES
+
         document.addEventListener("DOMContentLoaded", function () {
             // Función para eliminar un restaurante
             document.querySelectorAll('.delete-restaurant').forEach(button => {
@@ -235,6 +240,8 @@
                     }
                 });
             });
+
+            // USUARIOS
 
             // Función para eliminar un usuario
             document.querySelectorAll('.delete-user').forEach(button => {
