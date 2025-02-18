@@ -97,4 +97,35 @@ public function index()
         return response()->json(['success' => 'Restaurante eliminado con éxito.']);
     }
 
+    // Almacenar un nuevo restaurante con AJAX
+    public function store(Request $request)
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'average_price' => 'required|numeric',
+            'gerente_id' => 'required|exists:users,id', // Validar que el gerente exista
+            'location_id' => 'required|exists:locations,id', // Validar que la ubicación exista
+        ]);
+
+        // Crear el nuevo restaurante
+        $restaurant = Restaurant::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'average_price' => $request->average_price,
+            'gerente_id' => $request->gerente_id,
+            'location_id' => $request->location_id,
+        ]);
+
+        // Responder con éxito si la solicitud es AJAX
+        if ($request->ajax()) {
+            return response()->json(['success' => 'Restaurante creado con éxito.', 'restaurant' => $restaurant]);
+        }
+
+        // Redirigir si no es una solicitud AJAX
+        return redirect()->route('restaurants.index')->with('success', 'Restaurante creado con éxito.');
+    }
+
+
 }
