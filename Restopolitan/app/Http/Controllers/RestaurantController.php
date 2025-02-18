@@ -97,4 +97,29 @@ public function index()
         return response()->json(['success' => 'Restaurante eliminado con éxito.']);
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+            'average_price' => 'required|numeric',
+            'gerente_id' => 'nullable',
+            'location_id' => 'required',
+        ]);
+    
+        // Crear el nuevo restaurante
+        $restaurant = Restaurant::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'average_price' => $request->average_price,
+            'gerente_id' => $request->gerente_id,
+            'location_id' => $request->location_id,
+        ]);
+
+        $restaurant->load('gerente', 'location'); 
+    
+        // Retornar una respuesta con éxito y el nuevo restaurante
+        return response()->json(['success' => true, 'restaurant' => $restaurant]);
+    }
+    
 }
