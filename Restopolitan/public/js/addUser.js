@@ -58,6 +58,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Limpiar el formulario y ocultarlo
                 document.getElementById('create-user-form').reset();
                 document.getElementById('add-user-form').style.display = 'none';
+
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
             }
         })
         .catch(error => {
