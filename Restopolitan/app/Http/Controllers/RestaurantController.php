@@ -31,16 +31,20 @@ class RestaurantController extends Controller
             $query->where('restaurants.name', 'like', '%' . $request->input('name') . '%');
         }
 
-        /*if ($request->has('min_price') && $request->has('max_price')) {
-            $query->whereBetween('restaurants.average_price', [$request->input('min_price'), $request->input('max_price')]);
-        }*/
-
         if ($request->has('cuisine') && !empty($request->input('cuisine'))) {
             $query->having('cuisine_name', 'like', "%" . $request->input('cuisine') . "%");
         }
 
         if ($request->has('min_rating') && is_numeric($request->input('min_rating'))) {
             $query->having('avg_rating', '>=', (float) $request->input('min_rating'));
+        }
+
+        if ($request->has('min_price') && is_numeric($request->input('min_price'))) {
+            $query->where('restaurants.average_price', '>=', (float) $request->input('min_price'));
+        }
+    
+        if ($request->has('max_price') && is_numeric($request->input('max_price'))) {
+            $query->where('restaurants.average_price', '<=', (float) $request->input('max_price'));
         }
 
         $restaurants = $query->get();

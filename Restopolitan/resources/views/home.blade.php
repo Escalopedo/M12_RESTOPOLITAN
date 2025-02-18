@@ -21,10 +21,11 @@
             <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Restopolitan Logo" width="150">
             </a>
+            @auth
             <form class="search-form" id="search-form">
                 <input type="text" class="form-control" id="search-input" placeholder="Buscar por nombre...">
                 <select class="form-control" id="cuisine-selector">
-                    <option value="">Todos los tipos de cocina</option>
+                    <option value="">Tipos de cocina</option>
                     @foreach($cuisineTypes as $cuisine)
                         <option value="{{ $cuisine->name }}">{{ $cuisine->name }}</option>
                     @endforeach
@@ -37,8 +38,20 @@
                     <option value="4">⭐ 4+</option>
                     <option value="5">⭐ 5</option>
                 </select>
+                <input type="number" class="form-control" id="min_price" placeholder="Precio Mínimo">
+                <input type="number" class="form-control" id="max_price" placeholder="Precio Máximo">
                 <button type="submit" class="btn"><i class="fas fa-search"></i></button>
-            </form>            
+            </form>
+            @endauth
+            @guest
+                <form class="search-form d-none">
+                    <input type="text" class="form-control" id="search-input" disabled>
+                    <select class="form-control" id="cuisine-selector" disabled></select>
+                    <select class="form-control" id="rating-selector" disabled></select>
+                    <input type="number" class="form-control" id="min_price" disabled>
+                    <input type="number" class="form-control" id="max_price" disabled>
+                </form>
+            @endguest
             <ul class="nav-links">
                 @guest
                     <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
@@ -46,6 +59,9 @@
                 @endguest
             
                 @auth
+                    <li>
+                        <button id="clear-filters" class="btn btn-warning">Limpiar Filtros</button>
+                    </li>
                     <li>
                         <a href="{{ route('logout') }}" id="logout-button" class="btn btn-danger">
                             Cerrar sesión

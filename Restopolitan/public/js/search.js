@@ -8,7 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let searchInput = document.getElementById("search-input");
     let cuisineSelector = document.getElementById("cuisine-selector");
     let ratingSelector = document.getElementById("rating-selector");
+    let minPriceInput = document.getElementById("min_price");
+    let maxPriceInput = document.getElementById("max_price");
     let restaurantsContainer = document.getElementById("restaurants-container");
+    let clearFiltersButton = document.getElementById("clear-filters");
 
     function performSearch() {
         let params = new URLSearchParams();
@@ -17,11 +20,15 @@ document.addEventListener("DOMContentLoaded", function () {
         let name = searchInput.value.trim();
         let cuisine = cuisineSelector.value.trim();
         let rating = ratingSelector.value.trim();
+        let minPrice = minPriceInput.value.trim();
+        let maxPrice = maxPriceInput.value.trim();
 
         // Agregar parámetros solo si tienen valores
         if (name) params.append("name", name);
         if (cuisine) params.append("cuisine", cuisine);
         if (rating) params.append("min_rating", rating);
+        if (minPrice) params.append("min_price", minPrice);
+        if (maxPrice) params.append("max_price", maxPrice);
         console.log(`/search?${params.toString()}`);
 
         // Realizar la solicitud AJAX
@@ -39,4 +46,17 @@ document.addEventListener("DOMContentLoaded", function () {
     searchInput.addEventListener("keyup", performSearch);
     cuisineSelector.addEventListener("change", performSearch);
     ratingSelector.addEventListener("change", performSearch);
+    minPriceInput.addEventListener("input", performSearch);
+    maxPriceInput.addEventListener("input", performSearch);
+
+    if (clearFiltersButton) {
+        clearFiltersButton.addEventListener("click", function () {
+            searchInput.value = "";
+            cuisineSelector.value = "";
+            ratingSelector.value = "";
+            minPriceInput.value = "";
+            maxPriceInput.value = "";
+            performSearch(); // Ejecutar búsqueda con los filtros vacíos
+        });
+    }
 });
