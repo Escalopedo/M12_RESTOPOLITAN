@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -59,10 +61,24 @@ class UserController extends Controller
 
     // Eliminar un usuario
     public function destroy($id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
+        {
+            DB::beginTransaction(); // Inicia la transacción
         
-        return response()->json(['success' => 'Usuario eliminado con éxito.']);
-    }
+            try {
+                $user = User::findOrFail($id);
+        
+                $user->reviews()->delete(); 
+        
+                $user->delete();
+        
+                DB::commit(); // Confirma la transacción si todo ha ido bien
+        
+                return response()->json(['success' => 'Usuario y sus reseñas eliminados con éxito.']);
+            } catch (\Exception $e) {
+                DB::rollBack(); // Si ocurre un error, revertimos la transacción
+        
+                return response()->json(['success' => false, 'message' => 'Error al eliminar el usuario: ' . $e->getMessage()], 500);
+            }
+        }
+    
 }

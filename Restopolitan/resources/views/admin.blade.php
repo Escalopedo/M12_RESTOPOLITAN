@@ -209,6 +209,7 @@
                 document.getElementById('edit-restaurant-form').style.display = 'none';
             });
 
+            // Función para enviar el formulario de actualización del restaurante
             document.getElementById('update-restaurant-form').addEventListener('submit', function (event) {
                 event.preventDefault();
 
