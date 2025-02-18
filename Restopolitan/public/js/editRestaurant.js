@@ -1,7 +1,7 @@
-            // Función para editar un restaurante
-            document.querySelectorAll('.edit-restaurant').forEach(button => {
-                button.addEventListener('click', function () {
-                    const restaurantId = this.dataset.id;
+// Función para editar un restaurante
+ document.querySelectorAll('.edit-restaurant').forEach(button => {
+        button.addEventListener('click', function () {
+            const restaurantId = this.dataset.id;
                     fetch(`/restaurants/${restaurantId}/edit`)
                         .then(response => response.json())
                         .then(data => {
@@ -17,12 +17,12 @@
             });
 
             // Función para cancelar la edición del restaurante
-            document.getElementById('cancel-edit').addEventListener('click', function () {
+        document.getElementById('cancel-edit').addEventListener('click', function () {
                 document.getElementById('edit-restaurant-form').style.display = 'none';
-            });
+        });
 
-            document.getElementById('update-restaurant-form').addEventListener('submit', function (event) {
-                event.preventDefault();
+        document.getElementById('update-restaurant-form').addEventListener('submit', function (event) {
+            event.preventDefault();
 
                 const restaurantId = document.getElementById('restaurant-id').value;
                 const name = document.getElementById('name').value;
