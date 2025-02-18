@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Panel de Administración</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- SCRIPTS PARA CRUDS AJAX -->
-
-    <script src="{{ asset('js/addRestaurant.js') }}" defer></script>
-    <script src="{{ asset('js/editRestaurant.js') }}" defer></script>
-    <script src="{{ asset('js/deleteRestaurant.js') }}" defer></script>
-
-
-    <script src="{{ asset('js/addUser.js') }}" defer></script>
-    <script src="{{ asset('js/editUser.js') }}" defer></script>
-    <script src="{{ asset('js/deleteUser.js') }}" defer></script>
-
-    <!-- FILTROS -->
-
-    <script src="{{ asset('js/searchadmin.js') }}" defer></script>
-    <script src="{{ asset('js/admin.js') }}" defer></script>
-
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>Panel de Administración</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    
+        <!-- SCRIPTS PARA CRUDS AJAX -->
+    
+        <script src="{{ asset('js/addRestaurant.js') }}" defer></script>
+        <script src="{{ asset('js/editRestaurant.js') }}" defer></script>
+        <script src="{{ asset('js/deleteRestaurant.js') }}" defer></script>
+    
+    
+        <script src="{{ asset('js/addUser.js') }}" defer></script>
+        <script src="{{ asset('js/editUser.js') }}" defer></script>
+        <script src="{{ asset('js/deleteUser.js') }}" defer></script>
+    
+        <!-- FILTROS -->
+    
+        <script src="{{ asset('js/searchadmin.js') }}" defer></script>
+        <script src="{{ asset('js/admin.js') }}" defer></script>
+    
+    </head>
 <body>
     <nav class="navbar">
         <div class="container">
@@ -59,7 +59,6 @@
 
     <div class="container mt-5">
         <h1><strong>Panel de Administración</strong></h1>
-
 
         <button id="add-restaurant-btn" class="btn btn-success mb-3">RESTAURANTE NUEVO</button>
 
@@ -133,30 +132,9 @@
 
 
         <h4><strong>Restaurantes</strong></h4>
-        <div class="mb-3">
-            <form id="filter-restaurant-form">
-                <div class="row">
-                    <div class="col-md-2">
-                        <input type="text" id="filter-id" class="form-control" placeholder="ID">
-                    </div>
-                    <div class="col-md-2">
-                        <input type="text" id="filter-name" class="form-control" placeholder="Nombre">
-                    </div>
-                    <div class="col-md-2">
-                        <input type="text" id="filter-description" class="form-control" placeholder="Descripción">
-                    </div>
-                    <div class="col-md-2">
-                        <input type="number" id="filter-price" class="form-control" placeholder="Precio Promedio">
-                    </div>
-                    <div class="col-md-2">
-                        <input type="text" id="filter-gerente" class="form-control" placeholder="Gerente">
-                    </div>
-                    <div class="col-md-2">
-                        <input type="text" id="filter-location" class="form-control" placeholder="Ubicación">
-                    </div>
-                </div>
-            </form>
-        </div>
+
+        
+
         <table class="table table-hover">
             <thead class="table-dark">
                 <tr>
@@ -176,7 +154,7 @@
                         <td>{{ $restaurant->name }}</td>
                         <td>{{ $restaurant->description }}</td>
                         <td>{{ $restaurant->average_price }}€</td>
-                        <td>{{ $restaurant->gerente ? $restaurant->gerente ? $restaurant->gerente->name : 'No asignado' : 'No asignado'}}</td>
+                        <td>{{ $restaurant->gerente ? $restaurant->gerente->name : 'No asignado'}}</td>
                         <td>{{ $restaurant->location->street_address }}</td>
                         <td>
                             <button class="btn btn-primary edit-restaurant" data-id="{{ $restaurant->id }}">Editar</button>
@@ -233,7 +211,8 @@
     </div>
 </div>
         <h4><strong>Usuarios</strong></h4>
-        <div class="row mb-3">
+
+<div class="row mb-3">
             <div class="col-md-4">
                 <input type="text" id="user-name-filter" class="form-control" placeholder="Filtrar por nombre...">
             </div>
@@ -249,6 +228,7 @@
                 </select>
             </div>
         </div>
+
         <table class="table table-hover">
             <thead class="table-dark">
                 <tr>
@@ -315,42 +295,8 @@
             </div>
         </div>
 
-        <script>
-            // ELIMINAR RESTAURANTE
-            document.querySelectorAll('.delete-restaurant').forEach(button => {
-                button.addEventListener('click', function () {
-                    const restaurantId = this.dataset.id;
-                    Swal.fire({
-                        title: "¿Quieres eliminar este restaurante?",
-                        text: "¡No podrás revertir esta acción!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#d33",
-                        cancelButtonColor: "#3085d6",
-                        confirmButtonText: "Sí, eliminar",
-                        cancelButtonText: "Cancelar"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            fetch(/restaurants/${restaurantId}`, {
-                                method: 'DELETE',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                                }
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    Swal.fire('Eliminado', 'El restaurante ha sido eliminado', 'success');
-                                    document.getElementById(restaurant-${restaurantId}).remove();
-                                }
-                            });
-                        }
-                    });
-                });
-            });
 
-        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

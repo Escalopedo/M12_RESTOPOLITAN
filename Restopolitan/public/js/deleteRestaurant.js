@@ -1,5 +1,6 @@
+// ELIMINAR RESTAURANTE
 document.querySelectorAll('.delete-restaurant').forEach(button => {
-    button.addEventListener('click', function () {
+    button.addEventListener('click', function() {
         const restaurantId = this.dataset.id;
         Swal.fire({
             title: "¿Quieres eliminar este restaurante?",
@@ -13,19 +14,19 @@ document.querySelectorAll('.delete-restaurant').forEach(button => {
         }).then((result) => {
             if (result.isConfirmed) {
                 fetch(`/restaurants/${restaurantId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire('Eliminado', 'El restaurante ha sido eliminado', 'success');
-                        document.getElementById(`restaurant-${restaurantId}`).remove();
-                    }
-                });
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire('Eliminado', 'El restaurante ha sido eliminado', 'success');
+                            document.getElementById(`restaurant-${restaurantId}`).remove();
+                        }
+                    });
             }
         });
     });
