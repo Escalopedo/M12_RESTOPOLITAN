@@ -14,6 +14,12 @@ class RestaurantController extends Controller
         return view('admin', compact('restaurants'));
     }
 
+    public function show($id)
+    {
+        $restaurant = Restaurant::with('location')->findOrFail($id); 
+        return view('restaurants.details', compact('restaurant'));
+    }
+
     // Mostrar el formulario de edición de un restaurante
     public function edit($id)
     {

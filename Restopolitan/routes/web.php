@@ -16,6 +16,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Ruta para la página de detalles de un restaurante
 Route::get('/restaurants/{id}', [RestaurantController::class, 'show'])->name('restaurants.details');
+Route::post('/restaurants/{id}/review', [ReviewController::class, 'store'])->name('reviews.store');
 
 // CRUD de Restaurantes
 Route::resource('restaurants', RestaurantController::class)->middleware('auth');
