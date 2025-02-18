@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Escuchar cambios en el campo de búsqueda y el menú desplegable
-    searchInput.addEventListener("keyup", performSearch);
+    searchInput.addEventListener("input", performSearch);
     cuisineSelector.addEventListener("change", performSearch);
     ratingSelector.addEventListener("change", performSearch);
     minPriceInput.addEventListener("input", performSearch);

@@ -87,6 +87,22 @@
         </div>
 
         <!-- Listado de Usuarios -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <input type="text" id="user-name-filter" class="form-control" placeholder="Filtrar por nombre...">
+            </div>
+            <div class="col-md-4">
+                <input type="email" id="user-email-filter" class="form-control" placeholder="Filtrar por correo...">
+            </div>
+            <div class="col-md-4">
+                <select id="user-role-filter" class="form-control">
+                    <option value="">Todos los roles</option>
+                    @foreach($roles as $role)
+                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <h3>Usuarios</h3>
         <table class="table table-hover">
             <thead class="table-dark">
@@ -349,5 +365,6 @@
             });
         });
     </script>
+    <script src="{{ asset('js/searchadmin.js') }}" defer></script>
 </body>
 </html>

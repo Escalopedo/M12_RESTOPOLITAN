@@ -32,6 +32,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/search', [RestaurantController::class, 'search'])->name('restaurants.search');
 Route::resource('cuisine_types', CuisineTypeController::class);
+Route::get('/admin/users/filter', [AdminController::class, 'filterUsers'])->name('admin.users.filter');
 
 // Ruta protegida para administradores (Página de Admin)
 Route::middleware(['auth'])->group(function () {
