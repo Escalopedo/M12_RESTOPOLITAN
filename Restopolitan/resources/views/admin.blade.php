@@ -141,6 +141,7 @@
         </div>
     </div>
 </div>
+        <h4><strong>Usuarios</strong></h4>
         <div class="row mb-3">
             <div class="col-md-4">
                 <input type="text" id="user-name-filter" class="form-control" placeholder="Filtrar por nombre...">
@@ -157,7 +158,6 @@
                 </select>
             </div>
         </div>
-        <h4><strong>Usuarios</strong></h4>
         <table class="table table-hover">
             <thead class="table-dark">
                 <tr>
