@@ -51,13 +51,11 @@ Para acceder al proyecto en tu entorno local, sigue estos pasos:
 
 3. **Migraciones**:
 
-   ```bash
-php artisan migrate 
+   ```php artisan migrate```
 
 4. **Seeders**:
 
-   ```bash
-php artisan db:seed
+   ```php artisan db:seed```
 
 5. **Credenciales**:
 
