@@ -51,6 +51,37 @@
             </form>
         </div>
 
+        <button id="add-user-btn" class="btn btn-success mb-3">Añadir Usuario</button>
+
+        <!-- Formulario para añadir un nuevo usuario -->
+        <div id="add-user-form" class="mt-5" style="display:none;">
+            <h3>Añadir Usuario</h3>
+            <form id="create-user-form">
+                <div class="mb-3">
+                    <label for="new-user-name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="new-user-name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="new-user-email" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="new-user-email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="new-user-password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="new-user-password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="new-user-role" class="form-label">Rol</label>
+                    <select class="form-control" id="new-user-role" required>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">Añadir Usuario</button>
+                <button type="button" id="cancel-add-user" class="btn btn-secondary">Cancelar</button>
+            </form>
+        </div>
+
 
         <!-- Listado de Restaurantes -->
         <h3>Restaurantes</h3>
@@ -128,6 +159,7 @@
 
         <!-- Listado de Usuarios -->
         <h3>Usuarios</h3>
+
         <table class="table table-hover">
             <thead class="table-dark">
                 <tr>
@@ -193,7 +225,7 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             
-            // AÑADIR RESTAURANTE:
+            // AÑADIR RESTAURANTE O USUARIO::
 
             document.getElementById('add-restaurant-btn').addEventListener('click', function () {
                 document.getElementById('add-restaurant-form').style.display = 'block';
@@ -202,6 +234,82 @@
             document.getElementById('cancel-add').addEventListener('click', function () {
                 document.getElementById('add-restaurant-form').style.display = 'none';
             });
+
+            
+            // Mostrar el formulario de añadir usuario
+            document.getElementById('add-user-btn').addEventListener('click', function () {
+                document.getElementById('add-user-form').style.display = 'block';
+            });
+
+            // Ocultar el formulario de añadir usuario
+            document.getElementById('cancel-add-user').addEventListener('click', function () {
+                document.getElementById('add-user-form').style.display = 'none';
+            });
+
+
+
+            // AÑADIR USUARIO:
+
+            // Enviar el formulario para crear un usuario
+            document.getElementById('create-user-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Obtener los datos del formulario
+                const name = document.getElementById('new-user-name').value;
+                const email = document.getElementById('new-user-email').value;
+                const password = document.getElementById('new-user-password').value;
+                const roleId = document.getElementById('new-user-role').value;
+
+                // Enviar la solicitud AJAX
+                fetch('/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        password: password,
+                        role_id: roleId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire('Creado', 'El usuario se ha creado con éxito.', 'success');
+
+                        // Agregar el usuario a la tabla sin recargar la página
+                        const userList = document.getElementById('user-list');
+                        const newRow = document.createElement('tr');
+                        newRow.id = 'user-' + data.user.id;
+                        newRow.innerHTML = `
+                            <td>${data.user.id}</td>
+                            <td>${data.user.name}</td>
+                            <td>${data.user.email}</td>
+                            <td>${data.role_name}</td>
+                            <td>********</td>
+                            <td>
+                                <button class="btn btn-primary edit-user" data-id="${data.user.id}">Editar</button>
+                                <button class="btn btn-danger delete-user" data-id="${data.user.id}">Eliminar</button>
+                            </td>
+                        `;
+                        userList.appendChild(newRow);
+
+                        // Limpiar el formulario y ocultarlo
+                        document.getElementById('create-user-form').reset();
+                        document.getElementById('add-user-form').style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al crear el usuario:', error);
+                    Swal.fire('Error', 'Hubo un problema al crear el usuario.', 'error');
+                });
+            });
+
+            
+            
+            // AÑADIR RESTAURANTE:
 
                 document.getElementById('create-restaurant-form').addEventListener('submit', function (event) {
                 event.preventDefault(); // Evita el envío del formulario tradicional
@@ -363,6 +471,8 @@
            
            
             // USUARIOS
+
+            // AÑADIR USUARIOS: 
 
             // Función para eliminar un usuario
             document.querySelectorAll('.delete-user').forEach(button => {

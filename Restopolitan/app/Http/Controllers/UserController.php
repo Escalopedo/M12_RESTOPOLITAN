@@ -81,4 +81,35 @@ class UserController extends Controller
             }
         }
     
+
+
+    // Crear un nuevo usuario
+    public function store(Request $request)
+    {
+        // Validación de datos
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'role_id' => 'required|exists:roles,id'
+        ]);
+
+        // Creación del usuario
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'role_id' => $request->input('role_id')
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+            'role_name' => $user->role->name ?? 'No asignado'
+        ]);
+
+        $user->load('role'); 
+
+    }
+
 }
