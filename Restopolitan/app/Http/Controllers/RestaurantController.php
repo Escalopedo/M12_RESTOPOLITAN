@@ -50,7 +50,47 @@ public function index()
 
         return view('partials.restaurants', compact('restaurants'));
     }
-
+    public function filter(Request $request)
+    {
+        $filters = $request->all();
+    
+        $query = Restaurant::with(['gerente', 'location']);
+    
+        if (!empty($filters['id'])) {
+            $query->where('id', 'like', "%{$filters['id']}%");
+        }
+    
+        if (!empty($filters['name'])) {
+            $query->where('name', 'like', "%{$filters['name']}%");
+        }
+    
+        if (!empty($filters['description'])) {
+            $query->where('description', 'like', "%{$filters['description']}%");
+        }
+    
+        if (!empty($filters['average_price'])) {
+            $query->where('average_price', 'like', "%{$filters['average_price']}%");
+        }
+    
+        if (!empty($filters['gerente'])) {
+            $query->whereHas('gerente', function ($q) use ($filters) {
+                $q->where('name', 'like', "%{$filters['gerente']}%");
+            });
+        }
+    
+        if (!empty($filters['location'])) {
+            $query->whereHas('location', function ($q) use ($filters) {
+                $q->where('street_address', 'like', "%{$filters['location']}%")
+                  ->orWhere('city', 'like', "%{$filters['location']}%")
+                  ->orWhere('country', 'like', "%{$filters['location']}%");
+            });
+        }
+    
+        $restaurants = $query->get();
+    
+        return response()->json($restaurants);
+    }
+    
     public function show($id)
     {
         $restaurant = Restaurant::with('location')->findOrFail($id); 

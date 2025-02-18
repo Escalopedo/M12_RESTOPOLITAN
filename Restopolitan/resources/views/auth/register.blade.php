@@ -5,18 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+        <!-- Fuentes de Google -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        .hidden {
-            display: none;
-        }
-        .alert.alert-danger {
-            color: red;
-            margin-bottom: 15px;
-        }
-        .alert.alert-danger ul {
-            list-style-type: none;
-            padding: 0;
-        }
+        
     </style>
 </head>
 <body>

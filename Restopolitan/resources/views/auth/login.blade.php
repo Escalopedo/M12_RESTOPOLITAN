@@ -6,6 +6,9 @@
     <title>Login - Restopolitan</title>
     <script src="{{ asset('js/login.js') }}" defer></script> <!-- Archivo JavaScript externo -->
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+        <!-- Fuentes de Google -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <!-- Navbar -->
