@@ -39,6 +39,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|min:6',
+            'role_id' => 'required|exists:roles,id'
         ]);
     
         // Actualización
@@ -47,9 +48,12 @@ class UserController extends Controller
         if ($request->has('password')) {
             $user->password = bcrypt($request->input('password'));
         }
+        $user->role_id = $request->input('role_id');
         $user->save();
+
+        $roleName = $user->role->name;
     
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'role_name' => $roleName]);
     }
     
 
