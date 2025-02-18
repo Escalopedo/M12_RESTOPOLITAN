@@ -1,7 +1,7 @@
 /* Estilos generales */
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
@@ -221,6 +221,20 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}
+
+.alert.alert-danger {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.alert.alert-danger ul {
+    list-style-type: none;
+    padding: 0;
 }
 
 @media (max-width: 768px) {

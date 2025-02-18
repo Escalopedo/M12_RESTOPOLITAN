@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use App\Models\CuisineType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB; //Nos permite ejecutar consultas SQL más avanzadas, como cálculos con AVG().
+use Illuminate\Support\Facades\DB;
+
 class RestaurantController extends Controller
 {
 public function index()
@@ -51,7 +52,47 @@ public function index()
 
         return view('partials.restaurants', compact('restaurants'));
     }
-
+    public function filter(Request $request)
+    {
+        $filters = $request->all();
+    
+        $query = Restaurant::with(['gerente', 'location']);
+    
+        if (!empty($filters['id'])) {
+            $query->where('id', 'like', "%{$filters['id']}%");
+        }
+    
+        if (!empty($filters['name'])) {
+            $query->where('name', 'like', "%{$filters['name']}%");
+        }
+    
+        if (!empty($filters['description'])) {
+            $query->where('description', 'like', "%{$filters['description']}%");
+        }
+    
+        if (!empty($filters['average_price'])) {
+            $query->where('average_price', 'like', "%{$filters['average_price']}%");
+        }
+    
+        if (!empty($filters['gerente'])) {
+            $query->whereHas('gerente', function ($q) use ($filters) {
+                $q->where('name', 'like', "%{$filters['gerente']}%");
+            });
+        }
+    
+        if (!empty($filters['location'])) {
+            $query->whereHas('location', function ($q) use ($filters) {
+                $q->where('street_address', 'like', "%{$filters['location']}%")
+                  ->orWhere('city', 'like', "%{$filters['location']}%")
+                  ->orWhere('country', 'like', "%{$filters['location']}%");
+            });
+        }
+    
+        $restaurants = $query->get();
+    
+        return response()->json($restaurants);
+    }
+    
     public function show($id)
     {
         $restaurant = Restaurant::with('location')->findOrFail($id); 
@@ -96,5 +137,36 @@ public function index()
 
         return response()->json(['success' => 'Restaurante eliminado con éxito.']);
     }
+
+    // Almacenar un nuevo restaurante con AJAX
+    public function store(Request $request)
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'average_price' => 'required|numeric',
+            'gerente_id' => 'required|exists:users,id', // Validar que el gerente exista
+            'location_id' => 'required|exists:locations,id', // Validar que la ubicación exista
+        ]);
+
+        // Crear el nuevo restaurante
+        $restaurant = Restaurant::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'average_price' => $request->average_price,
+            'gerente_id' => $request->gerente_id,
+            'location_id' => $request->location_id,
+        ]);
+
+        // Responder con éxito si la solicitud es AJAX
+        if ($request->ajax()) {
+            return response()->json(['success' => 'Restaurante creado con éxito.', 'restaurant' => $restaurant]);
+        }
+
+        // Redirigir si no es una solicitud AJAX
+        return redirect()->route('restaurants.index')->with('success', 'Restaurante creado con éxito.');
+    }
+
 
 }

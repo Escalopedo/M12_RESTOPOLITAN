@@ -49,4 +49,4 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/restaurants/{restaurant}', [RestaurantController::class, 'update'])->name('restaurants.update');
         Route::delete('/restaurants/{restaurant}', [RestaurantController::class, 'destroy'])->name('restaurants.destroy');
     });
-});
+    Route::post('/restaurants/filter', [RestaurantController::class, 'filter'])->name('restaurants.filter');});

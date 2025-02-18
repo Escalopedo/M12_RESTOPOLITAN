@@ -35,4 +35,3 @@ class ReviewController extends Controller
     return redirect()->route('restaurants.show', $restaurant->id)->with('success', 'Reseña añadida.');
 }
 }
-
