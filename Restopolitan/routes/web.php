@@ -37,6 +37,7 @@ Route::get('/admin/users/filter', [AdminController::class, 'filterUsers'])->name
 // Ruta protegida para administradores (Página de Admin)
 Route::middleware(['auth'])->group(function () {
 
+    
     // Ruta de Admin, ahora apunta al AdminController
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 

@@ -139,11 +139,18 @@ public function destroy($id)
 
         // Solo quiero eliminar en la transacción la location, no al usuario
         // Relacion en la transacción
+        $reviews = $restaurant->reviews;
         $location = $restaurant->location;
 
         // Eliminar la ubicación (si existe)
         if ($location) {
             $location->delete();
+        }
+
+        if ($reviews) {
+            foreach ($reviews as $review) {
+                $review->delete();
+            }
         }
 
         // Eliminar el restaurante
