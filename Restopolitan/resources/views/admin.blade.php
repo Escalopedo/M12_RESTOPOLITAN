@@ -44,14 +44,13 @@
                     @if(Auth::user()->role && Auth::user()->role->name === 'Admin')
                         <li><a href="{{ route('home') }}" class="btn btn-outline-light">Home</a></li>
                     @endif
-                    <li>
-                        <a href="{{ route('logout') }}" id="logout-button" class="btn btn-danger">
-                            Cerrar sesión
-                        </a>
-                    </li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Cerrar sesión
+                    </a>
                 @endauth
             </ul>            
         </div>
@@ -60,7 +59,10 @@
     <div class="container mt-5">
         <h1><strong>Panel de Administración</strong></h1>
 
-        <button id="add-restaurant-btn" class="btn btn-success mb-3">RESTAURANTE NUEVO</button>
+        <div class="d-flex justify-content-end">
+            <button id="add-restaurant-btn" class="btn btn-success mb-3">RESTAURANTE NUEVO</button>
+            <button id="add-user-btn" class="btn btn-success mb-3 ms-2">USUARIO NUEVO</button>
+        </div>
 
         <!-- Formulario para añadir un nuevo restaurante -->
         <div id="add-restaurant-form" class="mt-5" style="display:none;">
@@ -76,7 +78,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="new-average-price" class="form-label">Precio Promedio</label>
-                    <input type="number" class="form-control" id="new-average-price" required>
+                    <input type="number" class="form-control" id="new-average-price" step="0.01" required>
                 </div>
                 <div class="mb-3">
                     <label for="new-gerente" class="form-label">Gerente</label>
