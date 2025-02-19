@@ -79,7 +79,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="new-average-price" class="form-label">Precio Promedio</label>
-                    <input type="number" class="form-control" id="new-average-price" required>
+                    <input type="number" class="form-control" id="new-average-price" step="0.01" required>
                 </div>
                 <div class="mb-3">
                     <label for="new-gerente" class="form-label">Gerente</label>
