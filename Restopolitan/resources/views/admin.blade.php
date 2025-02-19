@@ -101,8 +101,6 @@
             </form>
         </div>
 
-        <button id="add-user-btn" class="btn btn-success mb-3">AÑADIR USUARIO</button>
-
         <!-- Formulario para añadir un nuevo usuario -->
         <div id="add-user-form" class="mt-5" style="display:none;">
             <h3>Añadir Usuario</h3>
