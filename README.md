@@ -2,7 +2,7 @@
 
 ## Descripción del Proyecto
 
-Este proyecto consiste en la creación de un sitio web que actúa como una **guía de restaurantes** en nuestra ciudad, inspirado en el diseño y funcionalidad de **Restopolitan**. Utilizando el framework **Laravel**, la aplicación permite a los usuarios buscar restaurantes y filtrar por varios criterios como el tipo de cocina, valoración, y precio. Además, cuenta con funcionalidades avanzadas como la gestión de restaurantes por parte de administradores, sistema de valoraciones de usuarios y notificaciones por correo electrónico.
+Este proyecto consiste en la creación de un sitio web que actúa como una **guía de restaurantes** en nuestra ciudad, inspirado en el diseño y funcionalidad de **Restopolitan**. Utilizando el framework **Laravel**, la aplicación permite a los usuarios buscar restaurantes y filtrar por varios criterios como el tipo de cocina, valoración, y precio. Además, cuenta con funcionalidades avanzadas como la gestión de restaurantes por parte de administradores, sistema de valoraciones de usuarios y notificaciones por correo electrónico. 
 
 > **Objetivo**: Aprender a desarrollar aplicaciones web con **Laravel**.
 
