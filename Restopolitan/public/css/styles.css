@@ -341,3 +341,56 @@ footer p {
         background-repeat: no-repeat;
     }
 }
+@media (max-width: 768px) {
+    /* Ajustes para la barra de navegación */
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .search-form {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .search-form .form-control {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    .search-form button {
+        width: 50%;
+    }
+
+    /* Ajuste del Hero Section */
+    .hero-section {
+        height: auto;
+        padding: 50px 20px;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    .hero-section .price {
+        font-size: 1.5rem;
+    }
+
+    /* Ajustes para el contenedor de restaurantes */
+    .restaurant-item {
+        width: 100%;
+    }
+
+    /* Footer ajustes */
+    .footer .row {
+        text-align: center;
+    }
+}
