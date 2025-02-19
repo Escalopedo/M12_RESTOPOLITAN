@@ -187,7 +187,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="average_price" class="form-label">Precio Promedio</label>
-                        <input type="number" class="form-control" id="average_price" required>
+                        <input class="form-control" id="average_price" required>
                     </div>
                     <div class="mb-3">
                         <label for="gerente" class="form-label">Gerente</label>
