@@ -129,27 +129,54 @@ public function index()
     }
     
 
-    // Eliminar un restaurante
-    public function destroy($id)
-    {
+// Eliminar un restaurante y su ubicación asociada
+public function destroy($id)
+{
+    DB::beginTransaction();
+
+    try {
         $restaurant = Restaurant::findOrFail($id);
+
+        // Solo quiero eliminar en la transacción la location, no al usuario
+        // Relacion en la transacción
+        $reviews = $restaurant->reviews;
+        $location = $restaurant->location;
+
+        // Eliminar la ubicación (si existe)
+        if ($location) {
+            $location->delete();
+        }
+
+        if ($reviews) {
+            foreach ($reviews as $review) {
+                $review->delete();
+            }
+        }
+
+        // Eliminar el restaurante
         $restaurant->delete();
 
-        return response()->json(['success' => 'Restaurante eliminado con éxito.']);
-    }
+        DB::commit(); 
 
-    // Almacenar un nuevo restaurante con AJAX
+        return response()->json(['success' => 'Restaurante y su ubicación eliminados con éxito.']);
+    } catch (\Exception $e) {
+        DB::rollBack(); 
+
+        return response()->json(['success' => false, 'message' => 'Error al eliminar el restaurante: ' . $e->getMessage()], 500);
+    }
+}
+
+
     public function store(Request $request)
     {
-        // Validar los datos del formulario
         $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'name' => 'required',
+            'description' => 'nullable',
             'average_price' => 'required|numeric',
-            'gerente_id' => 'required|exists:users,id', // Validar que el gerente exista
-            'location_id' => 'required|exists:locations,id', // Validar que la ubicación exista
+            'gerente_id' => 'nullable',
+            'location_id' => 'required',
         ]);
-
+    
         // Crear el nuevo restaurante
         $restaurant = Restaurant::create([
             'name' => $request->name,
@@ -159,14 +186,10 @@ public function index()
             'location_id' => $request->location_id,
         ]);
 
-        // Responder con éxito si la solicitud es AJAX
-        if ($request->ajax()) {
-            return response()->json(['success' => 'Restaurante creado con éxito.', 'restaurant' => $restaurant]);
-        }
-
-        // Redirigir si no es una solicitud AJAX
-        return redirect()->route('restaurants.index')->with('success', 'Restaurante creado con éxito.');
+        $restaurant->load('gerente', 'location'); 
+    
+        // Retornar una respuesta con éxito y el nuevo restaurante
+        return response()->json(['success' => true, 'restaurant' => $restaurant]);
     }
-
-
+    
 }

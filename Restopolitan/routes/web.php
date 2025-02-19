@@ -18,7 +18,10 @@ use App\Models\CuisineType;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Ruta para la página de detalles de un restaurante
-Route::get('/restaurants/{id}', [RestaurantController::class, 'show'])->name('restaurants.details');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/restaurants/{id}', [RestaurantController::class, 'show'])->name('restaurants.details');
+});
+
 Route::post('/restaurants/{id}/review', [ReviewController::class, 'store'])->name('reviews.store');
 
 // CRUD de Restaurantes
@@ -33,10 +36,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/search', [RestaurantController::class, 'search'])->name('restaurants.search');
 Route::resource('cuisine_types', CuisineTypeController::class);
 Route::get('/admin/users/filter', [AdminController::class, 'filterUsers'])->name('admin.users.filter');
+Route::get('/admin/restaurants/filter', [AdminController::class, 'filterRestaurants'])->name('admin.restaurants.filter');
 
 // Ruta protegida para administradores (Página de Admin)
 Route::middleware(['auth'])->group(function () {
 
+    
     // Ruta de Admin, ahora apunta al AdminController
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
@@ -48,5 +53,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/restaurants/{restaurant}/edit', [RestaurantController::class, 'edit'])->name('restaurants.edit');
         Route::put('/restaurants/{restaurant}', [RestaurantController::class, 'update'])->name('restaurants.update');
         Route::delete('/restaurants/{restaurant}', [RestaurantController::class, 'destroy'])->name('restaurants.destroy');
+        Route::post('/restaurants', [RestaurantController::class, 'store'])->name('restaurants.store');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::delete('/users/{id}', [UserController::class, 'destroy']);
     });
     Route::post('/restaurants/filter', [RestaurantController::class, 'filter'])->name('restaurants.filter');});

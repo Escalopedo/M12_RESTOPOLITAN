@@ -57,4 +57,42 @@ class AdminController extends Controller
         // Devuelve la vista parcial con los resultados actualizados
         return view('partials.userAdmin', compact('users'));
     }
+
+    public function filterRestaurants(Request $request)
+    {
+        $query = Restaurant::with(['gerente', 'location']);
+
+        // Filtro por nombre
+        if ($request->has('name') && !empty($request->input('name'))) {
+            $query->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        // Filtro por precio mínimo
+        if ($request->has('min_price') && !empty($request->input('min_price'))) {
+            $query->where('average_price', '>=', $request->input('min_price'));
+        }
+
+        // Filtro por precio máximo
+        if ($request->has('max_price') && !empty($request->input('max_price'))) {
+            $query->where('average_price', '<=', $request->input('max_price'));
+        }
+
+        // Filtro por gerente (buscando por nombre en lugar de ID)
+        if ($request->has('gerente') && !empty($request->input('gerente'))) {
+            $query->whereHas('gerente', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->input('gerente') . '%');
+            });
+        }
+
+        // Filtro por ubicación (buscando por dirección en lugar de ID)
+        if ($request->has('location') && !empty($request->input('location'))) {
+            $query->whereHas('location', function ($q) use ($request) {
+                $q->where('street_address', 'like', '%' . $request->input('location') . '%');
+            });
+        }
+
+        $restaurants = $query->get();
+
+        return view('partials.restaurantsAdmin', compact('restaurants'));
+    }
 }
