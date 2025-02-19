@@ -104,7 +104,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $restaurant->name }}</h5>
                             <p class="card-text">{{ $restaurant->description }}</p>
-                            <a href="{{ route('restaurants.details', $restaurant->id) }}" class="btn btn-outline-primary">Ver más</a>
+                            <a href="{{ Auth::check() ? route('restaurants.details', $restaurant->id) : route('login') }}" class="btn btn-outline-primary">
+                            Ver más
+                            </a>
                         </div>
                     </div>
                 </div>
