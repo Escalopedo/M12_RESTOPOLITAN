@@ -44,14 +44,13 @@
                     @if(Auth::user()->role && Auth::user()->role->name === 'Admin')
                         <li><a href="{{ route('home') }}" class="btn btn-outline-light">Home</a></li>
                     @endif
-                    <li>
-                        <a href="{{ route('logout') }}" id="logout-button" class="btn btn-danger">
-                            Cerrar sesión
-                        </a>
-                    </li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Cerrar sesión
+                    </a>
                 @endauth
             </ul>            
         </div>
